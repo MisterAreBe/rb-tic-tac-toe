@@ -27,4 +27,10 @@ class TicTacToe < Minitest::Test
         temp.place('x', 0, 0)
         assert_equal('x', temp.grid[0][0])
     end
+
+    def test_add_to_end_of_grid
+        temp = Game_board.new
+        temp.place('x', 2, 2)
+        assert_equal('x', temp.grid[2][2])
+    end
 end
