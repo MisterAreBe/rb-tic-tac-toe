@@ -33,4 +33,14 @@ class TicTacToe < Minitest::Test
         temp.place('x', 2, 2)
         assert_equal('x', temp.grid[2][2])
     end
+
+    def test_two_moves_filled
+        temp = Game_board.new
+        temp.place('o', 1, 2)
+        temp.place('x', 1, 1)
+        assert_equal([[' ', ' ',' '], [' ', 'x','o'], [' ', ' ',' ']], temp.grid)
+        temp.grid.each do |v|
+            p v
+        end
+    end
 end
