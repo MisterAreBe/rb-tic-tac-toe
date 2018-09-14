@@ -1,7 +1,7 @@
 class Game_board
 
     def initialize()
-        @grid = []
+        @grid = [[], [], []]
     end
 
     attr_reader :grid
