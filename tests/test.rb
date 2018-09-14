@@ -17,4 +17,8 @@ class TicTacToe < Minitest::Test
         assert_equal(Array, temp.grid[0].class)
     end
 
+    def test_grid_length_is_3
+        temp = Game_board.new
+        assert_equal(3, temp.grid.length)
+    end
 end
