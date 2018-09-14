@@ -7,4 +7,9 @@ class TicTacToe < Minitest::Test
         assert_equal(1, 1)
     end
 
+    def test_grid_is_array
+        temp = Game_board.new
+        assert_equal(Array, temp.grid)
+    end
+
 end
