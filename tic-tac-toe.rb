@@ -3,11 +3,13 @@ class Game_board
     def initialize(size)
         @size = size
         @grid = Array.new(@size) {Array.new(@size, '')}
+        @turn = 0
     end
 
     def place(piece, x, y)
         if @grid[x][y].length < 1
             @grid[x][y] = piece
+            @turn += 1
         end
     end
 
@@ -75,6 +77,11 @@ class Game_board
         end
         if collum == @size && winner != ''
             return winner
+        end
+
+        # check if out of turns
+        if @turn == (@size * @size)
+            return "Draw"
         end
 
         false
