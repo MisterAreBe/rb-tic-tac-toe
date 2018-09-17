@@ -66,7 +66,8 @@ class TicTacToe < Minitest::Test
         temp.place('x', 0, 0)
         temp.place('x', 0, 1)
         temp.place('x', 0, 2)
-        assert_equal('x', temp.winner())
+        temp.winner_is?()
+        assert_equal('x', temp.winner)
     end
 
 end
