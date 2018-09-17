@@ -63,7 +63,10 @@ class TicTacToe < Minitest::Test
 
     def test_winner_in_first_row
         temp = Game_board.new(3)
+        temp.place('x', 0, 0)
+        temp.place('x', 0, 1)
+        temp.place('x', 0, 2)
         assert_equal('x', temp.winner())
     end
-    
+
 end
