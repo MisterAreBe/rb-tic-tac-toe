@@ -50,8 +50,14 @@ class TicTacToe < Minitest::Test
         temp.place('x', 0, 2)
         temp.place('o', 0, 2)
         assert_equal([['', '', 'x'], ['o', '', ''], ['', '', '']], temp.grid)
-        temp.grid.each do |v|
-            p v
-        end
+        # temp.grid.each do |v|
+        #     p v
+        # end
+    end
+
+    def test_board_size
+        temp = Game_board.new(3)
+        assert_equal(3, temp.grid.length)
+        assert_equal(3, temp.grid[0].length)
     end
 end
