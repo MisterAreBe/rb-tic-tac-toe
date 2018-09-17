@@ -1,12 +1,8 @@
 class Game_board
 
-    def initialize()
-        @grid = [[], [], []]
-        @grid.each do |v|
-            3.times do 
-                v << ''
-            end
-        end
+    def initialize(size)
+        @size = size
+        @grid = Array.new(@size) {Array.new(@size, '')}
     end
 
     def place(piece, x, y)
