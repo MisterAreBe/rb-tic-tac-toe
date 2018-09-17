@@ -4,13 +4,15 @@ class Game_board
         @grid = [[], [], []]
         @grid.each do |v|
             3.times do 
-                v << ' '
+                v << ''
             end
         end
     end
 
     def place(piece, x, y)
-        @grid[x][y] = piece
+        if @grid[x][y].length < 1
+            @grid[x][y] = piece
+        end
     end
 
     attr_reader :grid

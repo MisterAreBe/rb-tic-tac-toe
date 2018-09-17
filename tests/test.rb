@@ -38,7 +38,7 @@ class TicTacToe < Minitest::Test
         temp = Game_board.new
         temp.place('o', 1, 2)
         temp.place('x', 1, 1)
-        assert_equal([[' ', ' ',' '], [' ', 'x','o'], [' ', ' ',' ']], temp.grid)
+        assert_equal([['', '', ''], ['', 'x','o'], ['', '','']], temp.grid)
         # temp.grid.each do |v|
         #     p v
         # end
@@ -49,7 +49,7 @@ class TicTacToe < Minitest::Test
         temp.place('o', 1, 0)
         temp.place('x', 0, 2)
         temp.place('o', 0, 2)
-        assert_equal([[' ', ' ', 'x'], ['o', ' ', ' '], [' ', ' ', ' ']], temp.grid)
+        assert_equal([['', '', 'x'], ['o', '', ''], ['', '', '']], temp.grid)
         temp.grid.each do |v|
             p v
         end
