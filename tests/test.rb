@@ -66,8 +66,7 @@ class TicTacToe < Minitest::Test
         temp.place('x', 0, 0)
         temp.place('x', 0, 1)
         temp.place('x', 0, 2)
-        temp.winner_is?()
-        assert_equal('x', temp.winner)
+        assert_equal('x', temp.winner_is?())
     end
 
     def test_winner_in_first_collum
@@ -75,9 +74,8 @@ class TicTacToe < Minitest::Test
         temp.place('o', 0, 0)
         temp.place('o', 1, 0)
         temp.place('o', 2, 0)
-        temp.winner_is?()
-        assert_equal('o', temp.winner)
+        assert_equal('o', temp.winner_is?())
     end
-    
+
 
 end
