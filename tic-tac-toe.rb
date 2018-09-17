@@ -3,7 +3,6 @@ class Game_board
     def initialize(size)
         @size = size
         @grid = Array.new(@size) {Array.new(@size, '')}
-        @winner = 'No Winner Yet!'
     end
 
     def place(piece, x, y)
@@ -21,28 +20,48 @@ class Game_board
         end
 
         # check if winner is vertical
-        collum = 0
-        while collum < @size
-            winner = @grid[collum][0] 
-            # winner is the value of grid[0][0] aka top left, increases to next collum
-            counter = 0
-            @grid.each do |v|
-                # if all of the values are the same in a single collum, counter ticks up to size
-                unless v[collum] == winner
-                    break
+        row = 0
+        while row < @size
+            collum = 0
+            while collum < @size
+                winner = @grid[collum][row] 
+                # winner is the value of grid[0][0] aka top left, increases to next collum
+                counter = 0
+                while counter < @size
+                    unless @grid[counter][collum] == winner
+                        break
+                    end
+                    counter += 1
                 end
-                counter += 1
+                # if the counter ticked enough, and the winner is not blank, you win
+                if counter == @size && winner != ''
+                    return winner
+                end
+                # else starts looking at the next collum
+                collum += 1
             end
-            # if the counter ticked enough, and the winner is not blank, you win
-            if counter == @size && winner != ''
-                return winner
-            end
-            # else if starts looking at the next collum
-            collum += 1
+            row += 1
         end
 
-    end
+        # check if winner is diagonal down
+        winner = @grid[0][0]
+        collum = 0
+        row = 0
+        counter = 0
+        while counter < @size
+            unless @grid[collum][row] == winner
+                break
+            end
+            collum += 1
+            row += 1
+            counter += 1
+        end
+        if collum == @size && winner != ''
+            return winner
+        end
 
+        false
+    end
 
     attr_reader :grid
 end
