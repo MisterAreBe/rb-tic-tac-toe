@@ -60,6 +60,23 @@ class Game_board
             return winner
         end
 
+        # check if winner is diagonal upwards
+        winner = @grid[0][2]
+        collum = 0
+        row = 2
+        counter = 0
+        while counter < @size
+            unless @grid[collum][row] == winner
+                break
+            end
+            collum += 1
+            row -= 1
+            counter += 1
+        end
+        if collum == @size && winner != ''
+            return winner
+        end
+
         false
     end
 
