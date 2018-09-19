@@ -7,4 +7,9 @@ class SequentialAi < Minitest::Test
         assert_equal(1, 1)
     end
 
+    def test_class_is_sequential_ai
+        temp = Sequential_ai.new('x', '')
+        assert_equal(Sequential_ai, temp.class)
+    end
+
 end
