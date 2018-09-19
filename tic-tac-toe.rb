@@ -14,10 +14,8 @@ class Game_board
     end
 
     def place(piece, x, y)
-        if @grid[x][y].length < 1
-            @grid[x][y] = piece
-            @turn += 1
-        end
+        @grid[x][y] = piece
+        @turn += 1
     end
 
     def winner_is?()

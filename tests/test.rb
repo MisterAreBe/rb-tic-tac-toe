@@ -44,11 +44,13 @@ class TicTacToe < Minitest::Test
         # end
     end
 
-    def test_overwrite_moves
+    def test_overwrite_moves # later changed to check space in different function before placing
         temp = Game_board.new(3)
         temp.place('o', 1, 0)
         temp.place('x', 0, 2)
-        temp.place('o', 0, 2)
+        if temp.check_place(0, 2)
+            temp.place('o', 0, 2)
+        end
         assert_equal([['', '', 'x'], ['o', '', ''], ['', '', '']], temp.grid)
         # temp.grid.each do |v|
         #     p v
@@ -143,7 +145,9 @@ class TicTacToe < Minitest::Test
     def test_check_if_spot_empty_before_placement
         temp = Game_board.new(3)
         temp.place('x', 0, 2)
-        temp.place('o', 0, 2)
+        if temp.check_place(0, 2)
+            temp.place('o', 0, 2)
+        end
         assert_equal(false, temp.check_place(0, 2))
     end
 
