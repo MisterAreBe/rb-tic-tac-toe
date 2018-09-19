@@ -7,4 +7,10 @@ class UnbeatableAi < Minitest::Test
         assert_equal(1, 1)
     end
 
+    def test_class_is_unbeatable_ai
+        temp = Unbeatable_ai.new('x', '')
+        assert_equal(Unbeatable_ai, temp.class)
+    end
+
+
 end
