@@ -27,7 +27,7 @@ class RandomAi < Minitest::Test
     def test_random_placement
         board = Game_board.new(3)
         player = Random_ai.new('x', board)
-        player.place_piece(0,0)
+        player.place_random()
         temp = false
         board.grid.each do |v|
             if v.include?('x')
