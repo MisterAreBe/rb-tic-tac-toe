@@ -139,4 +139,12 @@ class TicTacToe < Minitest::Test
         temp.reset()
         assert_equal([['', '', ''],['', '', ''],['', '', '']], temp.grid)
     end
+
+    def test_check_if_spot_empty_before_placement
+        temp = Game_board.new(3)
+        temp.place('x', 0, 2)
+        temp.place('o', 0, 2)
+        assert_equal(false, temp.check_place(0, 2))
+    end
+
 end
