@@ -17,4 +17,11 @@ class SequentialAi < Minitest::Test
         assert_equal('o', temp.piece)
     end
 
+    def test_place_piece
+        board = Game_board.new(3)
+        temp = Sequential_ai.new('x', board)
+        temp.place_piece(1,1)
+        assert_equal('x', board.grid[1][1])
+    end
+
 end
