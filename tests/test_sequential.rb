@@ -12,4 +12,9 @@ class SequentialAi < Minitest::Test
         assert_equal(Sequential_ai, temp.class)
     end
 
+    def test_piece_is_o
+        temp = Sequential_ai.new('o', '')
+        assert_equal('o', temp.piece)
+    end
+
 end
