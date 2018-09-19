@@ -124,9 +124,19 @@ class TicTacToe < Minitest::Test
         temp.place('x', 1, 0)
         temp.place('o', 1, 2)
         temp.place('x', 2, 1)
-        temp.grid.each do |v|
-            p v
-        end
+        # temp.grid.each do |v|
+        #     p v
+        # end
         assert_equal('Draw', temp.winner_is?())
+    end
+
+    def test_reset_board
+        temp = Game_board.new(3)
+        temp.place('o', 0, 0)
+        temp.place('x', 1, 1)
+        temp.place('o', 2, 2)
+        assert_equal([['o', '', ''],['', 'x', ''],['', '', 'o']],temp.grid)
+        temp.reset()
+        assert_equal([['', '', ''],['', '', ''],['', '', '']], temp.grid)
     end
 end
