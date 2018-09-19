@@ -17,4 +17,11 @@ class UnbeatableAi < Minitest::Test
         assert_equal('o', temp.piece)
     end
 
+    def test_place_piece
+        board = Game_board.new(3)
+        temp = Unbeatable_ai.new('x', board)
+        temp.place_piece(0,2)
+        assert_equal('x', board.grid[0][2])
+    end
+
 end
