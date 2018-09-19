@@ -10,6 +10,7 @@ class Base_ai
         if @board.check_place(x,y)
             @board.place(@piece, x, y)
         end
+        false
     end
 
 
