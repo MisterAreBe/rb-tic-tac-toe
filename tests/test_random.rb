@@ -8,14 +8,14 @@ class RandomAi < Minitest::Test
     end
 
     def test_class_is_random_ai
-        temp = Random_ai.new
+        temp = Random_ai.new('o', '')
         assert_equal(Random_ai, temp.class)
     end
 
     def test_inheritence
-        temp = Random_ai.new('x')
+        temp = Random_ai.new('x', '')
         assert_equal('x',temp.piece)
     end
 
-    
+
 end
