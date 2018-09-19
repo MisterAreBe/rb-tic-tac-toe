@@ -12,5 +12,9 @@ class UnbeatableAi < Minitest::Test
         assert_equal(Unbeatable_ai, temp.class)
     end
 
+    def test_piece_is_o
+        temp = Unbeatable_ai.new('o', '')
+        assert_equal('o', temp.piece)
+    end
 
 end
