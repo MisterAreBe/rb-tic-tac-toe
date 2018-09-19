@@ -6,6 +6,13 @@ class Game_board
         @turn = 0
     end
 
+    def check_place(x, y)
+        if @grid[x][y] == ''
+            return true
+        end
+        false
+    end
+
     def place(piece, x, y)
         if @grid[x][y].length < 1
             @grid[x][y] = piece
