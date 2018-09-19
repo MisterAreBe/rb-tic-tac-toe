@@ -87,5 +87,10 @@ class Game_board
         false
     end
 
+    def reset()
+        @grid = Array.new(@size) {Array.new(@size, '')}
+        @turn = 0
+    end
+
     attr_reader :grid
 end
