@@ -14,6 +14,6 @@ class Base_ai
         end
     end
 
-
+    
     attr_reader :piece
 end
