@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require_relative "../game_board.rb"
 
-class TicTacToe < Minitest::Test
+class GameBoard < Minitest::Test
 
     def test_assert_that_1_equals_1
         assert_equal(1, 1)
