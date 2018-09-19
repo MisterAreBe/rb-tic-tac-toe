@@ -12,4 +12,10 @@ class TicTacToe < Minitest::Test
         assert_equal(Base_ai, temp.class)
     end
 
+    def test_class_is_string
+        temp = Base_ai.new('')
+        assert_equal(String, temp.piece)
+    end
+
+
 end
