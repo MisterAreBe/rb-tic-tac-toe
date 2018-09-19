@@ -9,8 +9,9 @@ class Base_ai
     def place_piece(x, y)
         if @board.check_place(x,y)
             @board.place(@piece, x, y)
+        else
+            return false
         end
-        false
     end
 
 
