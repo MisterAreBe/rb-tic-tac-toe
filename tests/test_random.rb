@@ -17,5 +17,11 @@ class RandomAi < Minitest::Test
         assert_equal('x',temp.piece)
     end
 
+    def test_place_piece
+        board = Game_board.new(3)
+        player = Random_ai.new('o', board)
+        player.place_piece(2,0)
+        assert_equal(['o', '', ''], board.grid[2])
+    end
 
 end
