@@ -97,5 +97,6 @@ class Game_board
         @turn = 0
     end
 
+    attr_reader :size
     attr_reader :grid
 end
