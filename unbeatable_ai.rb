@@ -3,6 +3,7 @@ require_relative 'base_ai.rb'
 class Unbeatable_ai < Base_ai
 
     def smart_move()
+        # win -start
         @board.grid.each_with_index do |row, i|
             temp = Hash.new
             temp['taken'] = []; temp['grab'] = []
@@ -18,7 +19,6 @@ class Unbeatable_ai < Base_ai
                 end
             end
         end
-
         
         collum = 0
         while collum < @board.size
@@ -79,6 +79,7 @@ class Unbeatable_ai < Base_ai
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             return place_piece(x, y)
         end
+        # win -stop
 
     end
 
