@@ -81,7 +81,7 @@ class UnbeatableAi < Minitest::Test
         temp.place_piece(2,0)
         temp.place_piece(0,2)
         temp.smart_move()
-        assert_equal([['o','',''],['','o',''],['','','o']], board.grid)
+        assert_equal([['','','o'],['','o',''],['o','','']], board.grid)
     end
       
 end

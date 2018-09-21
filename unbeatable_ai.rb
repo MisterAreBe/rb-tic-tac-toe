@@ -60,6 +60,26 @@ class Unbeatable_ai < Base_ai
             return place_piece(x, y)
         end
 
+        row = 0
+        collum = 2
+        counter = 0
+        temp = Hash.new
+        temp['taken'] = []; temp['grab'] = []
+        while counter < @board.size
+            if @board.grid[row][collum] == @piece
+                temp['taken'] << [row, collum]
+            else
+                temp['grab'] << [row, collum]
+            end
+            row += 1
+            collum -= 1
+            counter += 1
+        end
+        if temp['taken'].length == 2 && temp['grab'].length == 1
+            x = temp['grab'][0][0]; y = temp['grab'][0][1]
+            return place_piece(x, y)
+        end
+
     end
 
 end
