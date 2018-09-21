@@ -71,6 +71,7 @@ class Unbeatable_ai < Base_ai
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             return place_piece(x, y)
         end
+        false
     end
     
     def block_move()
@@ -142,6 +143,7 @@ class Unbeatable_ai < Base_ai
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             return place_piece(x, y)
         end
+        false
     end
 
     def fork_move()
@@ -165,15 +167,44 @@ class Unbeatable_ai < Base_ai
                 end
             end
             temp['mine'] = []; temp['blank'] = []
-                    
-
         end
+        false
+    end
+
+    def block_fork()
+        temp = Hash.new
+        temp['mine'] = []; temp['enemies'] = []; temp['blank'] = []
+        @board.grid.each_with_index do |row, i|
+            row.each_with_index do |tile, ii|
+                if tile != @piece && tile != ''
+                    temp['enemies'] << [i, ii]
+                elsif tile == @piece
+                    temp['mine'] << [i, ii]
+                else
+                    temp['blank'] << [i, ii]
+                end
+            end
+        end
+        temp['blank'].each do |v|
+            if v == [temp['mine'][0][0]-1, temp['mine'][0][1]]
+                return place_piece(v[0], v[1])
+            elsif v == [temp['mine'][0][0]+1, temp['mine'][0][1]]
+                return place_piece(v[0], v[1])
+            elsif v == [temp['mine'][0][0], temp['mine'][0][1]-1]
+                return place_piece(v[0], v[1])
+            elsif v == [temp['mine'][0][0], temp['mine'][0][1]+1]
+                return place_piece(v[0], v[1])
+            end
+        end
+        false
     end
 
     def smart_move()
         unless win_move()
             unless block_move()
                 unless fork_move()
+                    unless block_fork()
+                    end
                 end
             end
         end
