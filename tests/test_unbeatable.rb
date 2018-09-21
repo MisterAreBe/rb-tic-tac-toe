@@ -39,4 +39,12 @@ class UnbeatableAi < Minitest::Test
         assert_equal(['x', 'x', 'x'], board.grid[2])
     end
 
+    def test_smart_move_vertical_win
+        board = Game_board.new(3)
+        temp = Unbeatable_ai.new('x', board)
+        temp.place_piece(0,0)
+        temp.place_piece(1,0)
+        temp.smart_move()
+        assert_equal([['x','',''],['x','',''],['x','','']], board.grid)
+    end
 end
