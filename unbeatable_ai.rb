@@ -31,7 +31,7 @@ class Unbeatable_ai < Base_ai
                 else
                     temp['grab'] << [counter, collum]
                 end
-            counter += 1
+                counter += 1
             end
             if temp['taken'].length == 2 && temp['grab'].length == 1
                 x = temp['grab'][0][0]; y = temp['grab'][0][1]
@@ -40,9 +40,7 @@ class Unbeatable_ai < Base_ai
             collum += 1
         end
 
-        row = 0
-        collum = 0
-        counter = 0
+        row = 0; collum = 0; counter = 0
         temp = Hash.new
         temp['taken'] = []; temp['grab'] = []
         while counter < @board.size
@@ -51,18 +49,14 @@ class Unbeatable_ai < Base_ai
             else
                 temp['grab'] << [row, collum]
             end
-            row += 1
-            collum += 1
-            counter += 1
+            row += 1; collum += 1; counter += 1
         end
         if temp['taken'].length == 2 && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             return place_piece(x, y)
         end
 
-        row = 0
-        collum = 2
-        counter = 0
+        row = 0; collum = 2; counter = 0
         temp = Hash.new
         temp['taken'] = []; temp['grab'] = []
         while counter < @board.size
@@ -71,9 +65,7 @@ class Unbeatable_ai < Base_ai
             else
                 temp['grab'] << [row, collum]
             end
-            row += 1
-            collum -= 1
-            counter += 1
+            row += 1; collum -= 1; counter += 1
         end
         if temp['taken'].length == 2 && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
@@ -108,7 +100,7 @@ class Unbeatable_ai < Base_ai
                 else
                     temp['block'] << [counter, collum]
                 end
-            counter += 1
+                counter += 1
             end
             if temp['taken'].length == 2 && temp['block'].length == 1
                 x = temp['block'][0][0]; y = temp['block'][0][1]
@@ -117,9 +109,7 @@ class Unbeatable_ai < Base_ai
             collum += 1
         end
 
-        row = 0
-        collum = 0
-        counter = 0
+        row = 0; collum = 0; counter = 0
         temp = Hash.new
         temp['taken'] = []; temp['grab'] = []
         while counter < @board.size
@@ -128,18 +118,14 @@ class Unbeatable_ai < Base_ai
             else
                 temp['grab'] << [row, collum]
             end
-            row += 1
-            collum += 1
-            counter += 1
+            row += 1; collum += 1; counter += 1
         end
         if temp['taken'].length == 2 && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             return place_piece(x, y)
         end
 
-        row = 0
-        collum = 2
-        counter = 0
+        row = 0; collum = 2; counter = 0
         temp = Hash.new
         temp['taken'] = []; temp['grab'] = []
         while counter < @board.size
@@ -148,14 +134,15 @@ class Unbeatable_ai < Base_ai
             else
                 temp['grab'] << [row, collum]
             end
-            row += 1
-            collum -= 1
-            counter += 1
+            row += 1; collum -= 1; counter += 1
         end
         if temp['taken'].length == 2 && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             return place_piece(x, y)
         end
+        # block -stop
+        # fork -start
+        
     end
 
 end
