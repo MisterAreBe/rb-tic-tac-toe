@@ -96,6 +96,28 @@ class Unbeatable_ai < Base_ai
                 end
             end
         end
+
+        collum = 0
+        while collum < @board.size
+            temp = Hash.new
+            temp['taken'] = []; temp['block'] = []
+            counter = 0
+            while counter < @board.size
+                if @board.grid[counter][collum] != @piece && @board.grid[counter][collum] != ''
+                    temp['taken'] << [counter, collum]
+                else
+                    temp['block'] << [counter, collum]
+                end
+            counter += 1
+            end
+            if temp['taken'].length == 2 && temp['block'].length == 1
+                x = temp['block'][0][0]; y = temp['block'][0][1]
+                return place_piece(x, y)
+            end
+            collum += 1
+        end
+
+
     end
 
 end
