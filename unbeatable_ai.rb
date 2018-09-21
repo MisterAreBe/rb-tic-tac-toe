@@ -2,8 +2,8 @@ require_relative 'base_ai.rb'
 
 class Unbeatable_ai < Base_ai
 
-    def smart_move()
-        # win -start
+    def win_move()
+        # horizontal win
         @board.grid.each_with_index do |row, i|
             temp = Hash.new
             temp['taken'] = []; temp['grab'] = []
@@ -19,7 +19,7 @@ class Unbeatable_ai < Base_ai
                 end
             end
         end
-        
+        # vertical win
         collum = 0
         while collum < @board.size
             temp = Hash.new
@@ -39,7 +39,7 @@ class Unbeatable_ai < Base_ai
             end
             collum += 1
         end
-
+        # diagonal L-R
         row = 0; collum = 0; counter = 0
         temp = Hash.new
         temp['taken'] = []; temp['grab'] = []
@@ -55,7 +55,7 @@ class Unbeatable_ai < Base_ai
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             return place_piece(x, y)
         end
-
+        # diagonal R-L
         row = 0; collum = 2; counter = 0
         temp = Hash.new
         temp['taken'] = []; temp['grab'] = []
@@ -71,8 +71,10 @@ class Unbeatable_ai < Base_ai
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             return place_piece(x, y)
         end
-        # win -stop
-        # block -start
+    end
+    
+    def block_move()
+        # horizontal block
         @board.grid.each_with_index do |row, i|
             temp = Hash.new
             temp['taken'] = []; temp['block'] = []
@@ -88,7 +90,7 @@ class Unbeatable_ai < Base_ai
                 end
             end
         end
-
+        # vertical block
         collum = 0
         while collum < @board.size
             temp = Hash.new
@@ -108,7 +110,7 @@ class Unbeatable_ai < Base_ai
             end
             collum += 1
         end
-
+        # diagonal block L-R
         row = 0; collum = 0; counter = 0
         temp = Hash.new
         temp['taken'] = []; temp['grab'] = []
@@ -124,7 +126,7 @@ class Unbeatable_ai < Base_ai
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             return place_piece(x, y)
         end
-
+        # diagonal block R-L
         row = 0; collum = 2; counter = 0
         temp = Hash.new
         temp['taken'] = []; temp['grab'] = []
@@ -140,9 +142,41 @@ class Unbeatable_ai < Base_ai
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             return place_piece(x, y)
         end
-        # block -stop
-        # fork -start
-        
+    end
+
+    def fork_move()
+        temp = Hash.new
+        temp['mine'] = []; temp['blank'] = []; temp['holdmine'] = []; temp['options'] = []
+        @board.grid.each_with_index do |row, i|
+            row.each_with_index do |tile, ii|
+                if tile == @piece
+                    temp['mine'] << [i, ii]
+                elsif tile == ''
+                    temp['blank'] << [i, ii]
+                end
+            end
+            if temp['mine'].length == 1 && temp['blank'].length == 2
+                temp['holdmine'] << temp['mine'][0]
+                temp['options'] << temp['blank'][0]; temp['options'] << temp['blank'][1]
+                if temp['holdmine'].length == 2
+                    x = temp['holdmine'][0][0]
+                    y = temp['holdmine'][1][0]
+                    return place_piece(x, y)
+                end
+            end
+            temp['mine'] = []; temp['blank'] = []
+                    
+
+        end
+    end
+
+    def smart_move()
+        unless win_move()
+            unless block_move()
+                unless fork_move()
+                end
+            end
+        end
     end
 
 end
