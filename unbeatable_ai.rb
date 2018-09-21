@@ -80,7 +80,22 @@ class Unbeatable_ai < Base_ai
             return place_piece(x, y)
         end
         # win -stop
-
+        # block -start
+        @board.grid.each_with_index do |row, i|
+            temp = Hash.new
+            temp['taken'] = []; temp['block'] = []
+            row.each_with_index do |tile, ii|
+                if tile != @piece && tile != ''
+                    temp['taken'] << [i, ii]
+                else
+                    temp['block'] << [i, ii]
+                end
+                if temp['taken'].length == 2 && temp['block'].length == 1
+                    x = temp['block'][0][0]; y = temp['block'][0][1]
+                    return place_piece(x, y)
+                end
+            end
+        end
     end
 
 end
