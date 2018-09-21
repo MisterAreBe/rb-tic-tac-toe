@@ -186,13 +186,13 @@ class Unbeatable_ai < Base_ai
             end
         end
         temp['blank'].each do |v|
-            if v == [temp['mine'][0][0]-1, temp['mine'][0][1]]
+            if v == [temp['mine'][0][0]-1, temp['mine'][0][1]] && temp['blank'].include?([temp['mine'][0][0]+1, temp['mine'][0][1]])
                 return place_piece(v[0], v[1])
-            elsif v == [temp['mine'][0][0]+1, temp['mine'][0][1]]
+            elsif v == [temp['mine'][0][0]+1, temp['mine'][0][1]] && temp['blank'].include?([temp['mine'][0][0]-1, temp['mine'][0][1]])
                 return place_piece(v[0], v[1])
-            elsif v == [temp['mine'][0][0], temp['mine'][0][1]-1]
+            elsif v == [temp['mine'][0][0], temp['mine'][0][1]-1] && temp['blank'].include?([temp['mine'][0][0], temp['mine'][0][1]+1])
                 return place_piece(v[0], v[1])
-            elsif v == [temp['mine'][0][0], temp['mine'][0][1]+1]
+            elsif v == [temp['mine'][0][0], temp['mine'][0][1]+1] && temp['blank'].include?([temp['mine'][0][0], temp['mine'][0][1]-1])
                 return place_piece(v[0], v[1])
             end
         end
