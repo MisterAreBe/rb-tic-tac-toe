@@ -128,5 +128,15 @@ class UnbeatableAi < Minitest::Test
         assert_equal([['o','',''],['','x',''],['','','x']], board.grid)
     end
 
-    
+    def test_block_enemy_diagonal
+        board = Game_board.new(3)
+        temp = Unbeatable_ai.new('x', board)
+        enemy = Base_ai.new('o', board)
+        enemy.place_piece(0,2)
+        enemy.place_piece(2,0)
+        temp.smart_move()
+        assert_equal([['','','o'],['','x',''],['o','','']], board.grid)
+    end
+
+
 end
