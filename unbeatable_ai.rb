@@ -185,23 +185,33 @@ class Unbeatable_ai < Base_ai
                 end
             end
         end
-        temp['blank'].each do |v|
-            if v == [temp['mine'][0][0]-1, temp['mine'][0][1]] && temp['blank'].include?([temp['mine'][0][0]+1, temp['mine'][0][1]])
-                return place_piece(v[0], v[1])
-            elsif v == [temp['mine'][0][0]+1, temp['mine'][0][1]] && temp['blank'].include?([temp['mine'][0][0]-1, temp['mine'][0][1]])
-                return place_piece(v[0], v[1])
-            elsif v == [temp['mine'][0][0], temp['mine'][0][1]-1] && temp['blank'].include?([temp['mine'][0][0], temp['mine'][0][1]+1])
-                return place_piece(v[0], v[1])
-            elsif v == [temp['mine'][0][0], temp['mine'][0][1]+1] && temp['blank'].include?([temp['mine'][0][0], temp['mine'][0][1]-1])
-                return place_piece(v[0], v[1])
+        if temp['mine'].length > 0 && temp['enemies'].length > 0
+            temp['blank'].each do |v|
+                if v == [temp['mine'][0][0]-1, temp['mine'][0][1]] && temp['blank'].include?([temp['mine'][0][0]+1, temp['mine'][0][1]])
+                    return place_piece(v[0], v[1])
+                elsif v == [temp['mine'][0][0]+1, temp['mine'][0][1]] && temp['blank'].include?([temp['mine'][0][0]-1, temp['mine'][0][1]])
+                    return place_piece(v[0], v[1])
+                elsif v == [temp['mine'][0][0], temp['mine'][0][1]-1] && temp['blank'].include?([temp['mine'][0][0], temp['mine'][0][1]+1])
+                    return place_piece(v[0], v[1])
+                elsif v == [temp['mine'][0][0], temp['mine'][0][1]+1] && temp['blank'].include?([temp['mine'][0][0], temp['mine'][0][1]-1])
+                    return place_piece(v[0], v[1])
+                end
+                if temp['enemies'][0][0] == 0 && @board.check_place(0, temp['enemies'][1][1])
+                    return place_piece(0, temp['enemies'][1][1])
+                elsif temp['enemies'][0][1] == 0 && @board.check_place(temp['enemies'][1][0], 0)
+                    return place_piece(temp['enemies'][1][0], y = 0)
+                elsif temp['enemies'][0][1] == 2 && temp['enemies'][1][0] == 2 && @board.check_place(2, 2)
+                    return place_piece(2, 2)
+                end
             end
-            if temp['enemies'][0][0] == 0 && @board.check_place(0, temp['enemies'][1][1])
-                return place_piece(0, temp['enemies'][1][1])
-            elsif temp['enemies'][0][1] == 0 && @board.check_place(temp['enemies'][1][0], 0)
-                return place_piece(temp['enemies'][1][0], y = 0)
-            elsif temp['enemies'][0][1] == 2 && temp['enemies'][1][0] == 2 && @board.check_place(2, 2)
-                return place_piece(2, 2)
-            end
+        end
+        false
+    end
+
+    def center_move()
+        center = @board.size/2
+        if @board.check_place(center, center)
+            return place_piece(center, center)
         end
         false
     end
@@ -211,6 +221,8 @@ class Unbeatable_ai < Base_ai
             unless block_move()
                 unless fork_move()
                     unless block_fork()
+                        unless center_move()
+                        end
                     end
                 end
             end
