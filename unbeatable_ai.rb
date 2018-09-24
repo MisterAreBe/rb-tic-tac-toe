@@ -216,12 +216,42 @@ class Unbeatable_ai < Base_ai
         false
     end
 
+    def opposite_corner()
+        temp = Hash.new(); temp['enemy'] = []
+        @board.grid.each_with_index do |row, i|
+            row.each_with_index do |v, ii|
+                if v != @piece && v != ''
+                    temp['enemy'] << [i, ii]
+                end
+            end
+        end
+        temp['enemy'].each_with_index do |v, i|
+            if v[0] == 0
+                x = 2
+            elsif v[0] == 2
+                x = 0
+            end
+            if v[1] == 0
+                y = 2
+            elsif v[1] == 2
+                y = 0
+            end
+            if @board.check_place(x, y)
+                return place_piece(x, y)
+            end
+        end
+        false
+    end
+
+
     def smart_move()
         unless win_move()
             unless block_move()
                 unless fork_move()
                     unless block_fork()
                         unless center_move()
+                            unless opposite_corner()
+                            end
                         end
                     end
                 end
