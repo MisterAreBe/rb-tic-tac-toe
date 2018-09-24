@@ -1,5 +1,7 @@
 require "minitest/autorun"
 require_relative "../unbeatable_ai.rb"
+require_relative "../random_ai.rb"
+require_relative "../sequential_ai.rb"
 
 class UnbeatableAi < Minitest::Test
 
@@ -231,6 +233,17 @@ class UnbeatableAi < Minitest::Test
             temp.empty_side()
         end
         assert_equal([['','x',''],['x','','x'],['','x','']], board.grid)
+    end
+
+    def test_unbeatable_ai
+        board = Game_board.new(3)
+        player1 = Unbeatable_ai.new('o', board)
+        player2 = Random_ai.new('x', board)
+        until board.winner_is?()
+            player1.smart_move()
+            player2.place_random()
+        end
+        assert_equal('', board.winner_is?())
     end
 
 end
