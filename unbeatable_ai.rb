@@ -195,6 +195,13 @@ class Unbeatable_ai < Base_ai
             elsif v == [temp['mine'][0][0], temp['mine'][0][1]+1] && temp['blank'].include?([temp['mine'][0][0], temp['mine'][0][1]-1])
                 return place_piece(v[0], v[1])
             end
+            if temp['enemies'][0][0] == 0 && @board.check_place(0, temp['enemies'][1][1])
+                return place_piece(0, temp['enemies'][1][1])
+            elsif temp['enemies'][0][1] == 0 && @board.check_place(temp['enemies'][1][0], 0)
+                return place_piece(temp['enemies'][1][0], y = 0)
+            elsif temp['enemies'][0][1] == 2 && temp['enemies'][1][0] == 2 && @board.check_place(2, 2)
+                return place_piece(2, 2)
+            end
         end
         false
     end
