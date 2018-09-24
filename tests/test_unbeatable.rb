@@ -280,27 +280,26 @@ class UnbeatableAi < Minitest::Test
         1000.times do
             player1 = Unbeatable_ai.new('x', board)
             player2 = Unbeatable_ai.new('o', board)
-            p '------------------------------------'
+            #p '------------------------------------'
             while true
                 player1.smart_move()
-                p board.grid
-                p "player 1 turn ^^^^"
+                #p board.grid
+                #p "player 1 turn ^^^^"
                 if board.winner_is?() != false
                     break
                 end
                 player2.smart_move()
-                p board.grid
-                p "player 2 turn ^^^^"
+                #p board.grid
+                #p "player 2 turn ^^^^"
                 if board.winner_is?() != false
                     break
                 end
             end
-            p '------------------------------------'
-            p "Aaaaand winner is? #{board.winner_is?()}"
+            #p '------------------------------------'
+            #p "Aaaaand winner is? #{board.winner_is?()}"
             assert_equal('Draw', board.winner_is?())
             board.reset()
         end
     end
-
 
 end

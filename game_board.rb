@@ -9,8 +9,9 @@ class Game_board
     def check_place(x, y)
         if @grid[x][y] == ''
             return true
+        else
+            false
         end
-        false
     end
 
     def place(piece, x, y)

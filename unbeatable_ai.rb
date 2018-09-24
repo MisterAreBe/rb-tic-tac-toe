@@ -180,6 +180,7 @@ class Unbeatable_ai < Base_ai
                     x = temp['holdmine'][0][0]
                     y = temp['holdmine'][1][0]
                     if @board.check_place(x, y)
+                        #p "i try to fork u"
                         return place_piece(x, y)
                     end
                 end
@@ -205,7 +206,32 @@ class Unbeatable_ai < Base_ai
         end
         if temp['mine'].length > 0 && temp['enemies'].length > 1
             temp['blank'].each do |v|
-                if v == [temp['mine'][0][0]-1, temp['mine'][0][1]] && @board.check_place(temp['mine'][0][0]+1, temp['mine'][0][1])
+                if temp['enemies'][0] == [0, 1] && temp['enemies'][1] == [1, 0] || temp['enemies'][0] == [1, 0] && temp['enemies'][1] == [0, 1] && @board.check_place(0, 0)
+                    return place_piece(0, 0)
+                elsif temp['enemies'][0] == [1, 0] && temp['enemies'][1] == [2, 1] || temp['enemies'][0] == [2, 1] && temp['enemies'][1] == [0, 1] && @board.check_place(2, 0)
+                    return place_piece(2, 0)
+                elsif temp['enemies'][0] == [1, 2] && temp['enemies'][1] == [2, 1] || temp['enemies'][0] == [2, 1] && temp['enemies'][1] == [1, 2] && @board.check_place(2, 2)
+                    return place_piece(2, 2)
+                elsif temp['enemies'][0] == [0, 1] && temp['enemies'][1] == [1, 2] || temp['enemies'][0] == [1, 2] && temp['enemies'][1] == [0, 1] && @board.check_place(0, 2)
+                    return place_piece(0, 2)
+                elsif temp['enemies'][0] == [1, 1] && temp['enemies'][1] == [2, 2] || temp['enemies'][0] == [2, 2] && temp['enemies'][1] == [1, 1] && @board.check_place(0, 2)
+                    return place_piece(0, 2)
+                elsif temp['enemies'][0] == [1, 1] && temp['enemies'][1] == [2, 2] || temp['enemies'][0] == [2, 2] && temp['enemies'][1] == [1, 1] && @board.check_place(2, 0)
+                    return place_piece(0, 2)
+                elsif temp['enemies'][0] == [1, 1] && temp['enemies'][1] == [2, 0] || temp['enemies'][0] == [2, 0] && temp['enemies'][1] == [1, 1] && @board.check_place(0, 0)
+                    return place_piece(0, 2)
+                elsif temp['enemies'][0] == [1, 1] && temp['enemies'][1] == [2, 0] || temp['enemies'][0] == [2, 0] && temp['enemies'][1] == [1, 1] && @board.check_place(2, 2)
+                    return place_piece(0, 2)
+                elsif temp['enemies'][0] == [1, 1] && temp['enemies'][1] == [0, 2] || temp['enemies'][0] == [0, 2] && temp['enemies'][1] == [1, 1] && @board.check_place(0, 0)
+                    return place_piece(0, 2)
+                elsif temp['enemies'][0] == [1, 1] && temp['enemies'][1] == [0, 2] || temp['enemies'][0] == [0, 2] && temp['enemies'][1] == [1, 1] && @board.check_place(2, 2)
+                    return place_piece(0, 2)
+                elsif temp['enemies'][0] == [1, 1] && temp['enemies'][1] == [0, 0] || temp['enemies'][0] == [0, 0] && temp['enemies'][1] == [1, 1] && @board.check_place(0, 2)
+                    return place_piece(0, 2)
+                elsif temp['enemies'][0] == [1, 1] && temp['enemies'][1] == [0, 0] || temp['enemies'][0] == [0, 0] && temp['enemies'][1] == [1, 1] && @board.check_place(2, 0)
+                    return place_piece(0, 2)
+                end
+                if v == [(temp['mine'][0][0])-1, temp['mine'][0][1]] && @board.check_place(temp['mine'][0][0]+1, temp['mine'][0][1])
                     return place_piece(v[0], v[1])
                 elsif v == [temp['mine'][0][0]+1, temp['mine'][0][1]] && @board.check_place(temp['mine'][0][0]-1, temp['mine'][0][1])
                     return place_piece(v[0], v[1])
@@ -213,13 +239,6 @@ class Unbeatable_ai < Base_ai
                     return place_piece(v[0], v[1])
                 elsif v == [temp['mine'][0][0], temp['mine'][0][1]+1] && @board.check_place(temp['mine'][0][0], temp['mine'][0][1]-1)
                     return place_piece(v[0], v[1])
-                end
-                if temp['enemies'][0][0] == 0 && @board.check_place(0, temp['enemies'][1][1])
-                    return place_piece(0, temp['enemies'][1][1])
-                elsif temp['enemies'][0][1] == 0 && @board.check_place(temp['enemies'][1][0], 0)
-                    return place_piece(temp['enemies'][1][0], y = 0)
-                elsif temp['enemies'][0][1] == 2 && temp['enemies'][1][0] == 2 && @board.check_place(2, 2)
-                    return place_piece(2, 2)
                 end
             end
         end
