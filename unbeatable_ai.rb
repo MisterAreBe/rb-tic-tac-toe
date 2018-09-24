@@ -278,8 +278,9 @@ class Unbeatable_ai < Base_ai
             return place_piece(2, 0)
         elsif @board.check_place(2, 2)
             return place_piece(2, 2)
+        else
+            false
         end
-        false
     end
 
     def empty_side()
@@ -291,8 +292,9 @@ class Unbeatable_ai < Base_ai
             return place_piece(1, 2)
         elsif @board.check_place(2, 1)
             return place_piece(2, 1)
+        else
+            false
         end
-        false
     end
 
     def smart_move()
