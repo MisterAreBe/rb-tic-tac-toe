@@ -240,10 +240,11 @@ class UnbeatableAi < Minitest::Test
         player1 = Unbeatable_ai.new('o', board)
         player2 = Random_ai.new('x', board)
         until board.winner_is?()
+            p board.grid
             player1.smart_move()
             player2.place_random()
         end
-        assert_equal('', board.winner_is?())
+        assert_equal('o', board.winner_is?())
     end
 
 end

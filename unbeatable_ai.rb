@@ -185,7 +185,7 @@ class Unbeatable_ai < Base_ai
                 end
             end
         end
-        if temp['mine'].length > 0 && temp['enemies'].length > 0
+        if temp['mine'].length > 0 && temp['enemies'].length > 1
             temp['blank'].each do |v|
                 if v == [temp['mine'][0][0]-1, temp['mine'][0][1]] && temp['blank'].include?([temp['mine'][0][0]+1, temp['mine'][0][1]])
                     return place_piece(v[0], v[1])
@@ -229,18 +229,22 @@ class Unbeatable_ai < Base_ai
         end
         if temp['enemy'].length > 0
             temp['enemy'].each do |v|
-                if v[0] == 0
-                    x = 2
-                elsif v[0] == 2
-                    x = 0
-                end
-                if v[1] == 0
-                    y = 2
-                elsif v[1] == 2
-                    y = 0
-                end
-                if @board.check_place(x, y)
-                    return place_piece(x, y)
+                if v[0] == 0 && v[1] == 0
+                    if @board.check_place(2, 2)
+                        return place_piece(2, 2)
+                    end
+                elsif v[0] == 0 && v[1] == 2
+                    if @board.check_place(2, 0)
+                        return place_piece(2, 0)
+                    end
+                elsif v[0] == 2 && v[1] == 0
+                    if @board.check_place(0, 2)
+                        return place_piece(0, 2)
+                    end
+                elsif v[0] == 2 && v[1] == 2
+                    if @board.check_place(0, 0)
+                        return place_piece(0, 0)
+                    end
                 end
             end
         end
