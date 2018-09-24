@@ -235,7 +235,7 @@ class UnbeatableAi < Minitest::Test
         assert_equal([['','x',''],['x','','x'],['','x','']], board.grid)
     end
 
-    def test_unbeatable_ai
+    def test_unbeatable_ai_vs_random
         1000.times do
         board = Game_board.new(3)
         player1 = Unbeatable_ai.new('o', board)
@@ -254,5 +254,26 @@ class UnbeatableAi < Minitest::Test
         refute_equal('x', board.winner_is?())
         end
     end
+
+    def test_vs_sequential_ai
+        board = Game_board.new(3)
+        1000.times do
+            player1 = Unbeatable_ai.new('x', board)
+            player2 = Sequential_ai.new('o', board)
+            while true
+                player1.smart_move()
+                if board.winner_is?() != false
+                    break
+                end
+                player2.place_sequential()
+                if board.winner_is?() != false
+                    break
+                end
+            end
+            assert_equal('x', board.winner_is?())
+            board.reset()
+        end
+    end
+
 
 end
