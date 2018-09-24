@@ -260,6 +260,19 @@ class Unbeatable_ai < Base_ai
         false
     end
 
+    def empty_side()
+        if @board.check_place(0, 1)
+            return place_piece(0, 1)
+        elsif @board.check_place(1, 0)
+            return place_piece(1, 0)
+        elsif @board.check_place(1, 2)
+            return place_piece(1, 2)
+        elsif @board.check_place(2, 1)
+            return place_piece(2, 1)
+        end
+        false
+    end
+
     def smart_move()
         unless win_move()
             unless block_move()
@@ -268,6 +281,8 @@ class Unbeatable_ai < Base_ai
                         unless center_move()
                             unless opposite_corner()
                                 unless empty_corner()
+                                    unless empty_side()
+                                    end
                                 end
                             end
                         end
