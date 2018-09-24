@@ -4,9 +4,11 @@ class Random_ai < Base_ai
 
     def place_random()
         temp = Array.new(@board.size) {|i| i}
-        x = temp.sample; y = temp.sample
-        until place_piece(x,y)
+        while true
             x = temp.sample; y = temp.sample
+            if @board.check_place(x, y)
+                return place_piece(x, y)
+            end
         end
     end
 

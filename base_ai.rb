@@ -7,13 +7,9 @@ class Base_ai
     end
 
     def place_piece(x, y)
-        if @board.check_place(x,y)
-            @board.place(@piece, x, y)
-        else
-            return false
-        end
+        @board.place(@piece, x, y)
     end
 
-    
+
     attr_reader :piece
 end

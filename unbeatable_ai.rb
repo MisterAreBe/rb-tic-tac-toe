@@ -15,7 +15,9 @@ class Unbeatable_ai < Base_ai
                 end
                 if temp['taken'].length == 2 && temp['grab'].length == 1
                     x = temp['grab'][0][0]; y = temp['grab'][0][1]
-                    return place_piece(x, y)
+                    if @board.check_place(x, y)
+                        return place_piece(x, y)
+                    end
                 end
             end
         end
@@ -35,7 +37,9 @@ class Unbeatable_ai < Base_ai
             end
             if temp['taken'].length == 2 && temp['grab'].length == 1
                 x = temp['grab'][0][0]; y = temp['grab'][0][1]
-                return place_piece(x, y)
+                if @board.check_place(x, y)
+                    return place_piece(x, y)
+                end
             end
             collum += 1
         end
@@ -53,7 +57,9 @@ class Unbeatable_ai < Base_ai
         end
         if temp['taken'].length == 2 && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
-            return place_piece(x, y)
+            if @board.check_place(x, y)
+                return place_piece(x, y)
+            end
         end
         # diagonal R-L
         row = 0; collum = 2; counter = 0
@@ -69,7 +75,9 @@ class Unbeatable_ai < Base_ai
         end
         if temp['taken'].length == 2 && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
-            return place_piece(x, y)
+            if @board.check_place(x, y)
+                return place_piece(x, y)
+            end
         end
         false
     end
@@ -87,7 +95,9 @@ class Unbeatable_ai < Base_ai
                 end
                 if temp['taken'].length == 2 && temp['block'].length == 1
                     x = temp['block'][0][0]; y = temp['block'][0][1]
-                    return place_piece(x, y)
+                    if @board.check_place(x, y)
+                        return place_piece(x, y)
+                    end
                 end
             end
         end
@@ -107,7 +117,9 @@ class Unbeatable_ai < Base_ai
             end
             if temp['taken'].length == 2 && temp['block'].length == 1
                 x = temp['block'][0][0]; y = temp['block'][0][1]
-                return place_piece(x, y)
+                if @board.check_place(x, y)
+                    return place_piece(x, y)
+                end
             end
             collum += 1
         end
@@ -125,7 +137,9 @@ class Unbeatable_ai < Base_ai
         end
         if temp['taken'].length == 2 && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
-            return place_piece(x, y)
+            if @board.check_place(x, y)
+                return place_piece(x, y)
+            end
         end
         # diagonal block R-L
         row = 0; collum = 2; counter = 0
@@ -141,7 +155,9 @@ class Unbeatable_ai < Base_ai
         end
         if temp['taken'].length == 2 && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
-            return place_piece(x, y)
+            if @board.check_place(x, y)
+                return place_piece(x, y)
+            end
         end
         false
     end
@@ -163,7 +179,9 @@ class Unbeatable_ai < Base_ai
                 if temp['holdmine'].length == 2
                     x = temp['holdmine'][0][0]
                     y = temp['holdmine'][1][0]
-                    return place_piece(x, y)
+                    if @board.check_place(x, y)
+                        return place_piece(x, y)
+                    end
                 end
             end
             temp['mine'] = []; temp['blank'] = []
@@ -187,13 +205,13 @@ class Unbeatable_ai < Base_ai
         end
         if temp['mine'].length > 0 && temp['enemies'].length > 1
             temp['blank'].each do |v|
-                if v == [temp['mine'][0][0]-1, temp['mine'][0][1]] && temp['blank'].include?([temp['mine'][0][0]+1, temp['mine'][0][1]])
+                if v == [temp['mine'][0][0]-1, temp['mine'][0][1]] && @board.check_place(temp['mine'][0][0]+1, temp['mine'][0][1])
                     return place_piece(v[0], v[1])
-                elsif v == [temp['mine'][0][0]+1, temp['mine'][0][1]] && temp['blank'].include?([temp['mine'][0][0]-1, temp['mine'][0][1]])
+                elsif v == [temp['mine'][0][0]+1, temp['mine'][0][1]] && @board.check_place(temp['mine'][0][0]-1, temp['mine'][0][1])
                     return place_piece(v[0], v[1])
-                elsif v == [temp['mine'][0][0], temp['mine'][0][1]-1] && temp['blank'].include?([temp['mine'][0][0], temp['mine'][0][1]+1])
+                elsif v == [temp['mine'][0][0], temp['mine'][0][1]-1] && @board.check_place(temp['mine'][0][0], temp['mine'][0][1]+1)
                     return place_piece(v[0], v[1])
-                elsif v == [temp['mine'][0][0], temp['mine'][0][1]+1] && temp['blank'].include?([temp['mine'][0][0], temp['mine'][0][1]-1])
+                elsif v == [temp['mine'][0][0], temp['mine'][0][1]+1] && @board.check_place(temp['mine'][0][0], temp['mine'][0][1]-1)
                     return place_piece(v[0], v[1])
                 end
                 if temp['enemies'][0][0] == 0 && @board.check_place(0, temp['enemies'][1][1])
