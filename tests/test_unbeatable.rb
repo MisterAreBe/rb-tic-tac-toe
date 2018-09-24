@@ -236,13 +236,18 @@ class UnbeatableAi < Minitest::Test
     end
 
     def test_unbeatable_ai
+        1000.times do
         board = Game_board.new(3)
         player1 = Unbeatable_ai.new('o', board)
         player2 = Random_ai.new('x', board)
-        until board.winner_is?()
-            p board.grid
+        p "------------------------------"
+        while board.winner_is?() == false
             player1.smart_move()
             player2.place_random()
+            p board.grid
+        end
+        p "------------------------------"
+
         end
         assert_equal('o', board.winner_is?())
     end
