@@ -248,13 +248,14 @@ class Unbeatable_ai < Base_ai
     end
 
     def empty_corner()
-        x = 0; y = 0
-        while x < @board.size
-            if @board.check_place(x, y)
-                return place_piece(x, y)
-            else
-                x += 1; y += 1
-            end
+        if @board.check_place(0, 0)
+            return place_piece(0, 0)
+        elsif @board.check_place(0, 2)
+            return place_piece(0, 2)
+        elsif @board.check_place(2, 0)
+            return place_piece(2, 0)
+        elsif @board.check_place(2, 2)
+            return place_piece(2, 2)
         end
         false
     end

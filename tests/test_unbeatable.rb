@@ -213,6 +213,22 @@ class UnbeatableAi < Minitest::Test
         enemy.place_piece(1,1)
         temp.smart_move()
         assert_equal([['o','',''],['','x',''],['','','']], board.grid)
+        board.reset()
+        enemy = Base_ai.new('o', board)
+        temp = Unbeatable_ai.new('x', board)
+        enemy.place_piece(1,1)
+        4.times do
+            temp.empty_corner()
+        end
+        assert_equal([['x','','x'],['','o',''],['x','','x']], board.grid)
+    end
+
+    def test_empty_side
+        board = Game_board.new(3)
+        enemy = Base_ai.new('o', board)
+        temp = Unbeatable_ai.new('x', board)
+        temp.empty_side()
+        assert_equal([['','x',''],['','',''],['','','']], board.grid)
     end
 
 end
