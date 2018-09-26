@@ -1,5 +1,4 @@
 require_relative 'ttt_require_me.rb'
-board = Game_board.new(3)
 
 def intro() # Intro has the user pick between PvC, CvC, and the piece they want to use
     system('cls')
@@ -275,6 +274,7 @@ def pvp(player, enemy, board) # Player vs player
 end
 
 while true # Game start
+    board = Game_board.new(3)
     player = intro()
     if player == "bot battle"
        winner = bot_battle(board)
@@ -298,17 +298,3 @@ while true # Game start
         end
     end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
