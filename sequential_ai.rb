@@ -17,4 +17,7 @@ class Sequential_ai < Base_ai
         end
     end
 
+    def move()
+        place_sequential()
+    end
 end

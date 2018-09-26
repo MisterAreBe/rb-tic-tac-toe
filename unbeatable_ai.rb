@@ -335,4 +335,7 @@ class Unbeatable_ai < Base_ai
         end
     end
 
+    def move()
+        smart_move()
+    end
 end
