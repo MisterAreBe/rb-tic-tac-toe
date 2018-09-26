@@ -1,0 +1,51 @@
+<title>Rb's Tic-Tac-Toe!</title>
+<div class='title'>Tic-Tac-Toe by MisterArebe</div>
+<form method='post' action='/move' id='main_form'>
+    <div id='player1'>
+        <!--this area to show its X-->
+        <input type='radio' name='playerx' value='human' checked>Human
+        <input type='radio' name='playerx' value='easy'>Random Ai
+        <input type='radio' name='playerx' value='medium'>Sequential Ai
+        <input type='radio' name='playerx' value='hard'>Unbeatable Ai
+
+    </div>
+    <div class='board' id='board'>
+        <table>
+            <%board.each_with_index do |row, i|%>
+                <tr>
+                    <%row.each_with_index do |v, ii|%>
+                        <td>
+                            <button name='tile' value='<%=[i,ii]%>'></button>
+                        </td>
+                    <%end%>
+                </tr>
+            <%end%>
+        </table>
+    </div>
+    <div id='player2'>
+        <!--this area to show its o-->
+        <input type='radio' name='playero' value='human'>Human
+        <input type='radio' name='playero' value='easy'>Random Ai
+        <input type='radio' name='playero' value='medium'>Sequential Ai
+        <input type='radio' name='playero' value='hard' checked>Unbeatable Ai
+
+    </div>
+    <div class='options'>
+        <div class='set_up'>
+            <button type='button' onclick='setUp()'>
+                Ready?
+            </button>
+        </div>
+        <div class='winner'>
+            <%=winner%>
+        </div>
+        <div class='reset'>
+            <button type='button' onclick='startOver()'>
+                Start over?
+            </button>
+            <button type='button' onclick='resetBoard()'>
+                Play again?
+            </button>
+        </div>
+    </div>
+</form>

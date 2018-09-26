@@ -10,6 +10,5 @@ class Base_ai
         @board.place(@piece, x, y)
     end
 
-
     attr_reader :piece
 end
