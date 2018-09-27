@@ -1,0 +1,147 @@
+body {
+    background-color: #000000;
+    background-image: url("/images/vegeta_goku.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.title {
+    padding: 1px 10px;
+    text-align: center;
+    font-size: 3rem;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    color: goldenrod;
+    top: 3%;
+    left: 50%;
+    width: 56%;
+    margin-left: -28%;
+    position: fixed;
+    background-color: #2b2b2bb2;
+    box-shadow: 0px 0px 20px 3px #0051ff,
+    inset 0px 0px 20px 3px #0051ff;
+}
+.board {
+    display: none;
+    top: 70%;
+    left: 50%;
+    width: 50%;
+    height: 60%;
+    margin-top: -25%; /*set to a negative number 1/2 of your height*/
+    margin-left: -25%; /*set to a negative number 1/2 of your width*/
+    border: 1px solid #ccccccb2;
+    background-color: #420000b2;
+    position:fixed;
+}
+button[name='tile'] {
+    height: 70%;
+    width: 70%;
+}
+button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+button:hover,
+button:focus {
+    cursor: pointer;
+}
+button img {
+    width: 100%;
+    height: 60%;
+}
+table {
+    height: 100%;
+    width: 100%;
+    background-color: #505050;
+    box-shadow: 0px 0px 20px 10px rgb(218, 165, 32),
+    0px 0px 15px 10px #3d7c98;
+}
+td {
+    text-align: center;
+    border: 1px solid #000000;
+}
+#player1,
+#player2 {
+    display: inline-block;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    color: goldenrod;
+    position: fixed;
+    top: 25%;
+    width: 15%;
+    background-color: #2b2b2bb2;
+    box-shadow: 0px 0px 20px 3px goldenrod,
+    inset 0px 0px 20px 3px #ffffff60;
+}
+#player1 {
+    left: 10%;
+    margin-left: -7.5%;
+}
+#player2 {
+    right: 10%;
+    margin-right: -7.5%;
+}
+input[type='radio'] {
+    display: none;
+}
+label {
+    color: gold;
+    display: block;
+    padding: 5px 0px;
+}
+label:hover {
+    color: white;
+    cursor: pointer;
+}
+.menu {
+    display: inline-block;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    color: goldenrod;
+    box-shadow: 0px 0px 5px 1px goldenrod,
+    inset 0px 0px 5px 1px goldenrod;
+}
+.options {
+    padding: 5px 10px;
+    display: block;
+    text-align: center;
+    font-size: 1.7rem;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    color: goldenrod;
+    top: 83%;
+    left: 50%;
+    width: 40%;
+    margin-left: -20%;
+    position: fixed;
+    background-color: #2b2b2bb2;
+    box-shadow: 0px 0px 20px 3px #0051ff,
+    inset 0px 0px 20px 3px #0051ff;
+}
+.set_up {
+    display: block;
+}
+.winner {
+    display: none;
+}
+.reset {
+    display: none;
+}
+.welcome {
+    text-align: center;
+    top: 70%;
+    left: 50%;
+    width: 50%;
+    height: 60%;
+    margin-top: -25%;
+    margin-left: -25%;
+    border: 1px solid #ccccccb2;
+    background-color: #420000b2;
+    position:fixed;
+    box-shadow: 0px 0px 5px 1px goldenrod,
+    inset 0px 0px 5px 1px goldenrod;
+}

@@ -16,7 +16,7 @@ post '/play' do
 end
 
 get '/board' do # Where the game is played
-  board = session[:board] || Array.new(size) {Array.new(size, '')}
+  board = session[:board] || temp
   playerx = session[:playerx] || ''
   playero = session[:playero] || ''
   winner = session[:winner] || ''
@@ -25,36 +25,77 @@ get '/board' do # Where the game is played
   else
     session[:turn] = board.turn
   end
+  show_board = session[:show_board] || "hide"
+  show_players = session[:show_players] || "show"
+  show_set_up = session[:show_set_up] || "show"
+  show_winner = session[:show_winner] || "hide"
+  show_reset = session[:show_reset] || "hide"
 
-  erb :board, :layout => :layout, locals: {board: board, winner: winner}
+  if winner == "x"
+    winner = "Vegeta has won!"
+  elsif winner == "o"
+    winner = "Goku has won!"
+  elsif winner == "Draw"
+    winner = "Draw!"
+  else
+    winner = ''
+  end 
+
+  erb :board, :layout => :layout, locals: {board: board, winner: winner, show_board: show_board, show_players: show_players, show_set_up: show_set_up, show_winner: show_winner, show_reset: show_reset}
 end
 
 post '/move' do # Proccessing moves
   puts "I like to move it move it!"
   turn = session[:turn]
-  tile = params[:tile]
+  temp = params[:tile]
 
-  if turn.even?
-    if session[:xhelp]
-      if session[:board].check_place(tile[0], tile[1])
-        session[:playerx].place_piece(tile[0], tile[1])
-      end
-    else
-      session[:playerx].move()
-    end
-  else
-    if session[:ohelp]
-      if session[:board].check_place(tile[0], tile[1])
-        session[:playero].place_piece(tile[0], tile[1])
-      end
-    else
-      session[:playero].move()
-    end
+  temp = temp.split(',')
+  tile = []
+  temp.each do |v|
+    tile << v.to_i
   end
+
+  # Player vs Computer --start
+  if session[:xhelp] && !session[:ohelp] && turn.even?
+    if session[:board].check_place(tile[0], tile[1])
+      session[:playerx].place_piece(tile[0], tile[1])
+    end
+    session[:playero].move()
+  elsif session[:ohelp] && !session[:xhelp] && !turn.even?
+    if session[:board].check_place(tile[0], tile[1])
+      session[:playero].place_piece(tile[0], tile[1])
+    end
+    session[:playerx].move()
+    # Player vs Computer --end
+    # For PvP turn taking --start
+  elsif session[:xhelp] && turn.even?
+    if session[:board].check_place(tile[0], tile[1])
+      session[:playerx].place_piece(tile[0], tile[1])
+    end
+  elsif session[:ohelp] && !turn.even? 
+    if session[:board].check_place(tile[0], tile[1])
+      session[:playero].place_piece(tile[0], tile[1])
+    end
+    # For PvP turn taking --end
+    # For Computer vs Computer --start
+  elsif !session[:xhelp] && !session[:ohelp] 
+    session[:playerx].move()
+    session[:playero].move()
+  end
+   # For Computer vs Computer --end
   
+  session[:show_board] = "show"
+  session[:show_players] = "hide"
+  session[:show_set_up] = "hide"
+  session[:show_winner] = "hide"
+  session[:show_reset] = "hide"
+
   unless session[:board].winner_is?()
-    session[:winner] = session[:board].winner_is?()
+    session[:winner] = "#{session[:board].winner_is?()}"
+    session[:show_winner] = "show"
+    session[:show_reset] = "show"
   end
+
   redirect '/board'
 end
 
@@ -87,19 +128,39 @@ post '/set_up' do # Set up the board to start a game
     session[:playero] = Base_ai.new('o', session[:board])
     session[:ohelp] = true
   end
+
+  if session[:ohelp] && !session[:xhelp]
+    session[:playerx].move()
+  end
+
+  session[:show_board] = "show"
+  session[:show_players] = "hide"
+  session[:show_set_up] = "hide"
+  session[:show_winner] = "hide"
+  session[:show_reset] = "hide"
   redirect '/board'
 end
 
 post '/start_over' do # Set the board and player choices back to blank
   puts "We starting over now!"
-  sesstion[:board] = Game_board.new(3)
-  sessio[:playerx] = ''
+  session[:board] = Game_board.new(3)
+  session[:playerx] = ''
   session[:playero] = ''
+  session[:show_board] = "hide"
+  session[:show_players] = "show"
+  session[:show_set_up] = "show"
+  session[:show_winner] = "hide"
+  session[:show_reset] = "hide"
   redirect '/board'
 end
 
 post '/reset' do # Reset the board but keep the players
   puts "Got reset Bro!"
   session[:board] = board.reset()
+  session[:show_board] = "show"
+  session[:show_players] = "hide"
+  session[:show_set_up] = "hide"
+  session[:show_winner] = "hide"
+  session[:show_reset] = "hide"
   redirect '/board'
 end
