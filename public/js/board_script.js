@@ -1,6 +1,4 @@
 function showHideStuff() {
-    var tileSize = document.getElementById('tile_size');
-    var grid = document.getElementsByTagName('td');
     var showBoard = document.getElementById('show_board');
     var showPlayers = document.getElementById('show_players');
     var showSetUp = document.getElementById('show_set_up');
@@ -15,13 +13,6 @@ function showHideStuff() {
     var options = document.getElementById('options');
     var showHide = [showBoard, showSetUp, showWinner, showReset]
     var changeView = [board, setUp, winner, reset]
-
-    tileSize = 100/tileSize.value;
-    for(var i = 0; i < grid.length; i++) {
-        grid[i].style.height = `${tileSize}%`;
-        grid[i].style.width = `${tileSize}%`;
-    }
-
     for(var i = 0; i < showHide.length; i++) {
         if(showHide[i].value == 'show') {
             changeView[i].style.display = "block";
@@ -48,6 +39,25 @@ function showHideStuff() {
         }else{
             options.style.display = 'block';
         }
+    }
+
+    var x = document.getElementsByTagName('input');
+    for(var i = 0; i < x.length; i++){
+        if(x[i].type == 'radio'){
+            if(x[i].checked == true){
+                x[i].labels[0].style.color = 'red';
+            }else if(x[i].checked == false){
+                x[i].labels[0].style.color = 'goldenrod';
+            }
+        }
+    }
+
+    var tileSize = document.getElementById('tile_size');
+    var grid = document.getElementsByTagName('td');
+    tileSize = 100/tileSize.value;
+    for(var i = 0; i < grid.length; i++) {
+        grid[i].style.height = `${tileSize}%`;
+        grid[i].style.width = `${tileSize}%`;
     }
 }
 function setUp() {
