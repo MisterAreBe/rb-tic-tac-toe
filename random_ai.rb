@@ -3,11 +3,23 @@ require_relative 'base_ai.rb'
 class Random_ai < Base_ai
 
     def place_random()
-        temp = Array.new(@board.size) {|i| i}
+        random_spot = []
+        temp = @board.grid
+        temp.each_with_index do |row, i|
+            row.each_with_index do |v, ii|
+                if v == ''
+                    random_spot << [i, ii]
+                end
+            end
+        end
         while true
-            x = temp.sample; y = temp.sample
-            if @board.check_place(x, y)
-                return place_piece(x, y)
+            z = random_spot.sample
+            if z.is_a?(Array)
+                if @board.check_place(z[0], z[1])
+                    return place_piece(z[0], z[1])
+                end
+            else
+                break
             end
         end
     end
