@@ -3,9 +3,6 @@ require_relative 'ttt_require_me.rb'
 
 enable :sessions
 
-temp = Game_board.new(3)
-size = temp.size
-
 get '/' do
   erb :index, :layout => :layout 
 end
@@ -16,6 +13,7 @@ post '/play' do
 end
 
 get '/board' do # Where the game is played
+  temp = Game_board.new(3)
   board = session[:board] || temp
   playerx = session[:playerx] || ''
   playero = session[:playero] || ''
