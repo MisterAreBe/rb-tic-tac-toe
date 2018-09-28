@@ -164,6 +164,7 @@ post '/start_over' do # Set the board and player choices back to blank
   session[:show_set_up] = "show"
   session[:show_winner] = "hide"
   session[:show_reset] = "hide"
+  session[:comp_vs_comp] = "not_bot"
   redirect '/board'
 end
 
