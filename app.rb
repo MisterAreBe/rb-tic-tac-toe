@@ -105,6 +105,7 @@ post '/move' do # Proccessing moves
     session[:winner] = "#{session[:board].winner_is?()}"
     session[:show_winner] = "show"
     session[:show_reset] = "show"
+    session[:comp_vs_comp] = "not_bot"
   end
 
   redirect '/board'
@@ -176,5 +177,10 @@ post '/reset' do # Reset the board but keep the players
   session[:show_set_up] = "hide"
   session[:show_winner] = "hide"
   session[:show_reset] = "hide"
+  if session[:ohelp] && !session[:xhelp]
+    session[:playerx].move()
+  elsif !session[:xhelp] && !session[:ohelp]
+    session[:comp_vs_comp] = "bot battle"
+  end
   redirect '/board'
 end
