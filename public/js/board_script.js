@@ -1,18 +1,17 @@
 function showHideStuff() {
     var showBoard = document.getElementById('show_board');
-    var showPlayers = document.getElementById('show_players');
     var showSetUp = document.getElementById('show_set_up');
     var showWinner = document.getElementById('show_winner');
     var showReset = document.getElementById('show_reset');
+    var showOptions = document.getElementById('show_options');
     var board = document.getElementById('board');
-    var player1 = document.getElementById('player1');
-    var player2 = document.getElementById('player2');
     var setUp = document.getElementById('set_up');
     var winner = document.getElementById('winner');
     var reset = document.getElementById('reset');
     var options = document.getElementById('options');
-    var showHide = [showBoard, showSetUp, showWinner, showReset]
-    var changeView = [board, setUp, winner, reset]
+    var showHide = [showBoard, showSetUp, showWinner, showReset, showOptions]
+    var changeView = [board, setUp, winner, reset, options]
+
     for(var i = 0; i < showHide.length; i++) {
         if(showHide[i].value == 'show') {
             changeView[i].style.display = "block";
@@ -21,24 +20,15 @@ function showHideStuff() {
         }
     }
 
+    var showPlayers = document.getElementById('show_players');
+    var player1 = document.getElementById('player1');
+    var player2 = document.getElementById('player2');
     if(showPlayers.value == 'show') {
         player1.style.display = "inline-block";
         player2.style.display = "inline-block";
     }else if(showPlayers.value == 'hide') {
         player1.style.display = "none";
         player2.style.display = "none";
-    }
-
-    var counter = 0;
-    for(var i = 1; i < showHide.length; i++) {
-        if(showHide[i].value == 'show') {
-            counter++
-        }
-        if(counter > 1){
-            options.style.display = 'block';
-        }else{
-            options.style.display = 'block';
-        }
     }
 
     var x = document.getElementsByTagName('input');
@@ -58,6 +48,12 @@ function showHideStuff() {
     for(var i = 0; i < grid.length; i++) {
         grid[i].style.height = `${tileSize}%`;
         grid[i].style.width = `${tileSize}%`;
+    }
+
+    var autoMove = document.getElementById('bot_bot');
+    var form = document.getElementById('main_form');
+    if(autoMove.value == "bot_bot"){
+        form.submit();
     }
 }
 function setUp() {

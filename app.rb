@@ -30,6 +30,12 @@ get '/board' do # Where the game is played
   show_set_up = session[:show_set_up] || "show"
   show_winner = session[:show_winner] || "hide"
   show_reset = session[:show_reset] || "hide"
+  temp_arr = [show_set_up, show_winner, show_reset]
+  if temp_arr.any? {|v| v == "show"}
+    show_options = "show"
+  else
+    show_options = "hide"
+  end
 
   if winner == "x"
     winner = "Vegeta has won!"
@@ -41,7 +47,9 @@ get '/board' do # Where the game is played
     winner = ''
   end 
 
-  erb :board, :layout => :layout, locals: {board: board, winner: winner, show_board: show_board, show_players: show_players, show_set_up: show_set_up, show_winner: show_winner, show_reset: show_reset}
+  bot_bot = session[:comp_vs_comp] || "not_bot"
+
+  erb :board, :layout => :layout, locals: {board: board, winner: winner, show_board: show_board, show_players: show_players, show_set_up: show_set_up, show_winner: show_winner, show_reset: show_reset, show_options: show_options, bot_bot: bot_bot}
 end
 
 post '/move' do # Proccessing moves
@@ -78,9 +86,12 @@ post '/move' do # Proccessing moves
     end
     # For PvP turn taking --end
     # For Computer vs Computer --start
-  elsif !session[:xhelp] && !session[:ohelp] 
+  elsif !session[:xhelp] && !session[:ohelp]
     session[:playerx].move()
     session[:playero].move()
+    if session[:comp_vs_comp] == "bot_bot" && turn > 0
+      sleep(1)
+    end
   end
    # For Computer vs Computer --end
   
@@ -90,7 +101,7 @@ post '/move' do # Proccessing moves
   session[:show_winner] = "hide"
   session[:show_reset] = "hide"
 
-  unless session[:board].winner_is?()
+  if session[:board].winner_is?() != false
     session[:winner] = "#{session[:board].winner_is?()}"
     session[:show_winner] = "show"
     session[:show_reset] = "show"
@@ -131,6 +142,8 @@ post '/set_up' do # Set up the board to start a game
 
   if session[:ohelp] && !session[:xhelp]
     session[:playerx].move()
+  elsif !session[:xhelp] && !session[:ohelp]
+    session[:comp_vs_comp] = "bot_bot"
   end
 
   session[:show_board] = "show"
@@ -156,7 +169,7 @@ end
 
 post '/reset' do # Reset the board but keep the players
   puts "Got reset Bro!"
-  session[:board] = board.reset()
+  session[:board] = session[:board].reset()
   session[:show_board] = "show"
   session[:show_players] = "hide"
   session[:show_set_up] = "hide"
