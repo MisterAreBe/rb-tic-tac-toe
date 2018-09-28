@@ -50,9 +50,9 @@ function showHideStuff() {
         grid[i].style.width = `${tileSize}%`;
     }
 
-    var autoMove = document.getElementById('bot_bot');
+    var autoMove = document.getElementById('bot_battle');
     var form = document.getElementById('main_form');
-    if(autoMove.value == "bot_bot"){
+    if(autoMove.value == "bot battle"){
         form.submit();
     }
 }

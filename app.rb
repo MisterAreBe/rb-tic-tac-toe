@@ -55,7 +55,7 @@ end
 post '/move' do # Proccessing moves
   puts "I like to move it move it!"
   turn = session[:turn]
-  temp = params[:tile]
+  temp = params[:tile] || ''
 
   temp = temp.split(',')
   tile = []
@@ -67,13 +67,13 @@ post '/move' do # Proccessing moves
   if session[:xhelp] && !session[:ohelp] && turn.even?
     if session[:board].check_place(tile[0], tile[1])
       session[:playerx].place_piece(tile[0], tile[1])
+      session[:playero].move()
     end
-    session[:playero].move()
   elsif session[:ohelp] && !session[:xhelp] && !turn.even?
     if session[:board].check_place(tile[0], tile[1])
       session[:playero].place_piece(tile[0], tile[1])
+      session[:playerx].move()
     end
-    session[:playerx].move()
     # Player vs Computer --end
     # For PvP turn taking --start
   elsif session[:xhelp] && turn.even?
@@ -89,7 +89,7 @@ post '/move' do # Proccessing moves
   elsif !session[:xhelp] && !session[:ohelp]
     session[:playerx].move()
     session[:playero].move()
-    if session[:comp_vs_comp] == "bot_bot" && turn > 0
+    if session[:comp_vs_comp] == "bot battle" && turn > 0
       sleep(1)
     end
   end
@@ -143,7 +143,7 @@ post '/set_up' do # Set up the board to start a game
   if session[:ohelp] && !session[:xhelp]
     session[:playerx].move()
   elsif !session[:xhelp] && !session[:ohelp]
-    session[:comp_vs_comp] = "bot_bot"
+    session[:comp_vs_comp] = "bot battle"
   end
 
   session[:show_board] = "show"
@@ -169,7 +169,7 @@ end
 
 post '/reset' do # Reset the board but keep the players
   puts "Got reset Bro!"
-  session[:board] = session[:board].reset()
+  session[:board].reset()
   session[:show_board] = "show"
   session[:show_players] = "hide"
   session[:show_set_up] = "hide"
