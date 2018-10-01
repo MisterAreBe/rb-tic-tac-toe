@@ -51,7 +51,6 @@ get '/board' do # Where the game is played
 end
 
 post '/move' do # Proccessing moves
-  puts "I like to move it move it!"
   turn = session[:turn]
   temp = params[:tile] || ''
 
@@ -110,7 +109,6 @@ post '/move' do # Proccessing moves
 end
 
 post '/set_up' do # Set up the board to start a game
-  puts "I got set up oh yea!"
   session[:board] = Game_board.new(3)
   x = params[:playerx]
   o = params[:playero]
@@ -154,7 +152,6 @@ post '/set_up' do # Set up the board to start a game
 end
 
 post '/start_over' do # Set the board and player choices back to blank
-  puts "We starting over now!"
   session[:board] = Game_board.new(3)
   session[:playerx] = ''
   session[:playero] = ''
@@ -168,7 +165,6 @@ post '/start_over' do # Set the board and player choices back to blank
 end
 
 post '/reset' do # Reset the board but keep the players
-  puts "Got reset Bro!"
   session[:board].reset()
   session[:show_board] = "show"
   session[:show_players] = "hide"

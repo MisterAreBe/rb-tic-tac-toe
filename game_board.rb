@@ -10,7 +10,7 @@ class Game_board
         if @grid[x][y] == ''
             return true
         else
-            false
+            return false
         end
     end
 
