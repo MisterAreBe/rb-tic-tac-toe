@@ -302,4 +302,17 @@ class UnbeatableAi < Minitest::Test
         end
     end
 
+    def test_broken_fork_block
+        board = Game_board.new(3)
+        player1 = Base_ai.new('x', board)
+        player2 = Unbeatable_ai.new('o', board)
+        player1.place_piece(1,0)
+        player2.move()
+        player1.place_piece(0,1)
+        player2.move()
+        player1.place_piece(2,2)
+        player2.move()
+        assert_equal([['o','x',''],['x','o',''],['','','x']], board.grid)
+    end
+
 end
