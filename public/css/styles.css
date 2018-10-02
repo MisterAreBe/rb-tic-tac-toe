@@ -134,9 +134,9 @@ label:hover {
 .welcome {
     text-align: center;
     top: 70%;
-    left: 50%;
-    width: 50%;
-    height: 60%;
+    left: 60%;
+    width: 35%;
+    height: 50%;
     margin-top: -25%;
     margin-left: -25%;
     border: 1px solid #ccccccb2;
@@ -144,4 +144,9 @@ label:hover {
     position:fixed;
     box-shadow: 0px 0px 5px 1px goldenrod,
     inset 0px 0px 5px 1px goldenrod;
+}
+.home_link {
+    text-decoration: none;
+    color: #b37400;
+    font-size: 2.7rem;
 }
