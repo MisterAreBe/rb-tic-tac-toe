@@ -64,12 +64,16 @@ post '/move' do # Proccessing moves
   if session[:xhelp] && !session[:ohelp] && turn.even?
     if session[:board].check_place(tile[0], tile[1])
       session[:playerx].place_piece(tile[0], tile[1])
-      session[:playero].move()
+      if session[:board].winner_is?() == false
+        session[:playero].move()
+      end
     end
   elsif session[:ohelp] && !session[:xhelp] && !turn.even?
     if session[:board].check_place(tile[0], tile[1])
       session[:playero].place_piece(tile[0], tile[1])
-      session[:playerx].move()
+      if session[:board].winner_is?() == false
+        session[:playerx].move()
+      end
     end
     # Player vs Computer --end
     # For PvP turn taking --start
@@ -85,7 +89,9 @@ post '/move' do # Proccessing moves
     # For Computer vs Computer --start
   elsif !session[:xhelp] && !session[:ohelp]
     session[:playerx].move()
-    session[:playero].move()
+    if session[:board].winner_is?() == false
+      session[:playero].move()
+    end
     if session[:comp_vs_comp] == "bot battle" && turn > 0
       sleep(1)
     end

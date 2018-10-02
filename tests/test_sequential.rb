@@ -31,5 +31,41 @@ class SequentialAi < Minitest::Test
         assert_equal('o', board.grid[0][0])
     end
 
+    def test_fails_at_last_move
+        board = Game_board.new(3)
+        player1 = Base_ai.new('x', board)
+        player2 = Sequential_ai.new('o', board)
+        player1.place_piece(0,0)
+        player2.move()
+        player1.place_piece(0,2)
+        player2.move()
+        player1.place_piece(1,1)
+        player2.move()
+        player1.place_piece(2,1)
+        player2.move()
+        player1.place_piece(2,2)
+        assert_equal([['x','o','x'],['o','x','o'],['o','x','x']], board.grid)
+        board.reset()
+        player1 = Base_ai.new('x', board)
+        player2 = Sequential_ai.new('o', board)
+        x = 0; y = 0
+        while board.winner_is?() == false
+            player1.place_piece(x, y)
+            if board.winner_is? != false
+                break
+            end
+            player2.move()
+            if x == 0 && y == 0
+                y = 2
+            elsif x == 0 && y == 2
+                x = 1; y = 1
+            elsif x == 1 && y == 1
+                x = 2; y = 1
+            elsif x == 2 && y == 1
+                y = 2
+            end
+        end
+        assert_equal('x', board.winner_is?())
+    end
     
 end
