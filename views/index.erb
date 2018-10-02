@@ -1,11 +1,22 @@
 <title>Welcome</title>
+<meta name="google-signin-client_id" content="360720873685-2ucu0h81bev0h9a26hrmttsdctv5f1ua.apps.googleusercontent.com">
 <body>
     <div class="title">
         Welcome to RB's Tic-Tac-Toe!
     </div>
     <form method='post' action='/play'>
-        <div>
-            <button class='menu welcome'>Click Here to Play</button>
-        </div>
+		<div class='welcome'>
+			<div class="g-signin2 menu" data-onsuccess="onSignIn"></div>
+			<button class='menu'>Click Here to Play</button>
+		</div>
     </form>
 </body>
+<script src="https://apis.google.com/js/platform.js" async defer>
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+	console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+</script>
