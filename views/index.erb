@@ -7,6 +7,7 @@
     <form method='post' action='/play'>
 		<div class='welcome'>
 			<div class="g-signin2" data-onsuccess="onSignIn" style='text-align: -webkit-center; margin: 15% 3%;'></div>
+			<a href="/" onclick="signOut();">Sign out</a>
 			<button class='menu'>Click Here to Play</button>
 		</div>
     </form>
@@ -19,4 +20,10 @@ function onSignIn(googleUser) {
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 }
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
 </script>
