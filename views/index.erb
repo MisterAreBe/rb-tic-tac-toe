@@ -29,22 +29,22 @@ function signOut() {
       console.log('User signed out.');
     });
 }
-public void onClick(View v) {
-	switch (v.getId()) {
-        // ...
-        case R.id.button_sign_out:
-            signOut();
-            break;
-        // ...
-    }
-}
-private void signOut() {
-    mGoogleSignInClient.signOut()
-            .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    // ...
-        		}
-    		});
-}
+// public void onClick(View v) {
+// 	switch (v.getId()) {
+//         // ...
+//         case R.id.button_sign_out:
+//             signOut();
+//             break;
+//         // ...
+//     }
+// }
+// private void signOut() {
+//     mGoogleSignInClient.signOut()
+//             .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+//                 @Override
+//                 public void onComplete(@NonNull Task<Void> task) {
+//                     // ...
+//         		}
+//     		});
+// }
 </script>
