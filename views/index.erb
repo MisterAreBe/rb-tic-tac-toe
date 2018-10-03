@@ -6,7 +6,9 @@
     </div>
     <form method='post' action='/play'>
 		<div class='welcome'>
-			<div class="g-signin2" data-onsuccess="onSignIn" style='text-align: -webkit-center, center; margin: 10% 3% 5%;'></div>
+			<div class="g-signin2" data-onsuccess="onSignIn" style='text-align: -webkit-center; text-align: center; margin: 10% 3% 5%;'>
+				<iframe sandbox='allow-popups-to-escape-sandbox'></iframe>
+			</div>
 			<button type='button' class='menu' onclick="signOut()"style='text-align: center; margin: 0% 3% 10%;'>Sign out</button>
 			<button class='menu'>Click Here to Play</button>
 		</div>
