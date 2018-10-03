@@ -8,11 +8,12 @@ get '/' do
 end
 
 post '/play' do
-
+  session[:google_name] = params[:google_name]
   redirect '/board'
 end
 
 get '/board' do # Where the game is played
+  google_name = session[:google_name] || ''
   temp = Game_board.new(3)
   board = session[:board] || temp
   playerx = session[:playerx] || ''
@@ -47,7 +48,7 @@ get '/board' do # Where the game is played
 
   bot_bot = session[:comp_vs_comp] || "not_bot"
 
-  erb :board, :layout => :layout, locals: {board: board, winner: winner, show_board: show_board, show_players: show_players, show_set_up: show_set_up, show_winner: show_winner, show_reset: show_reset, show_options: show_options, bot_bot: bot_bot}
+  erb :board, :layout => :layout, locals: {board: board, winner: winner, show_board: show_board, show_players: show_players, show_set_up: show_set_up, show_winner: show_winner, show_reset: show_reset, show_options: show_options, bot_bot: bot_bot, google_name: google_name}
 end
 
 post '/move' do # Proccessing moves

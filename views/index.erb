@@ -10,13 +10,16 @@
 			<a href="" class='menu' onclick="signOut()"style='text-align: center; margin: 0% 3% 10%;'>Sign out</a>
 			<button class='menu'>Click Here to Play</button>
 		</div>
+		<input type='hidden' name='google_name' id='google_name'>
     </form>
 </body>
 <script src="https://apis.google.com/js/platform.js" async defer>
 function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
+	var x = document.getElementById('google_name');
+	var profile = googleUser.getBasicProfile();
 	console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
 	console.log('Name: ' + profile.getName());
+	x.value = `${profile.getName()}`
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 }
@@ -25,5 +28,23 @@ function signOut() {
     auth2.signOut().then(function () {
       console.log('User signed out.');
     });
-  }
+}
+public void onClick(View v) {
+	switch (v.getId()) {
+        // ...
+        case R.id.button_sign_out:
+            signOut();
+            break;
+        // ...
+    }
+}
+private void signOut() {
+    mGoogleSignInClient.signOut()
+            .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    // ...
+        		}
+    		});
+}
 </script>
