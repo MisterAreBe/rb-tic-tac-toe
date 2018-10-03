@@ -7,10 +7,10 @@
     <form method='post' action='/play'>
 		<div class='welcome'>
 			<div class="g-signin2" data-onsuccess="onSignIn" style='text-align: -webkit-center; margin: 10% 3% 5%;'></div>
-			<a href="" class='menu' onclick="signOut()"style='text-align: center; margin: 0% 3% 10%;'>Sign out</a>
+			<button type='button' class='menu' onclick="signOut()"style='text-align: center; margin: 0% 3% 10%;'>Sign out</button>
 			<button class='menu'>Click Here to Play</button>
 		</div>
-		<input type='hidden' name='google_name' id='google_name'>
+		<input type='hidden' name='google_name' id='google_name' value=''>
     </form>
 </body>
 <script src="https://apis.google.com/js/platform.js" async defer>
@@ -19,16 +19,16 @@ function onSignIn(googleUser) {
 	var profile = googleUser.getBasicProfile();
 	console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
 	console.log('Name: ' + profile.getName());
-	x.value = `${profile.getName()}`
+	x.value = `${profile.getName()}`;
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 }
-// function signOut() {
-//     var auth2 = gapi.auth2.getAuthInstance();
-//     auth2.signOut().then(function () {
-//       console.log('User signed out.');
-//     });
-// }
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+}
 public void onClick(View v) {
 	switch (v.getId()) {
         // ...
