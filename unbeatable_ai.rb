@@ -13,7 +13,7 @@ class Unbeatable_ai < Base_ai
                 else
                     temp['grab'] << [i, ii]
                 end
-                if temp['taken'].length == 2 && temp['grab'].length == 1
+                if temp['taken'].length == (@board.size - 1) && temp['grab'].length == 1
                     x = temp['grab'][0][0]; y = temp['grab'][0][1]
                     if @board.check_place(x, y)
                         return place_piece(x, y)
