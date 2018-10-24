@@ -69,14 +69,16 @@ class UnbeatableAi < Minitest::Test
         temp = Unbeatable_ai.new('o', board)
         temp.place_piece(0,0)
         temp.place_piece(1,1)
+        temp.place_piece(3,3)
         temp.smart_move()
         assert_equal([['o','','',''],['','o','',''],['','','o',''],['','','','o']], board.grid)
         board.reset()
         temp = Unbeatable_ai.new('x', board)
         temp.place_piece(2,2)
         temp.place_piece(0,0)
+        temp.place_piece(1,1)
         temp.smart_move()
-        assert_equal([['x','','',''],['','x','',''],['','','','x']], board.grid)
+        assert_equal([['x','','',''],['','x','',''],['','','x',''],['','','','x']], board.grid)
     end
 
     def test_smart_move_diagonal_right_to_left
