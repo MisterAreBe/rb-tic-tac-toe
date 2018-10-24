@@ -98,8 +98,12 @@ class Game_board
         @turn = 0
     end
 
-    
+    def find_mid()
+        @mid = (@size/2)
+        return @grid[@mid][@mid]
+    end
 
+    attr_reader :mid
     attr_reader :turn
     attr_reader :size
     attr_reader :grid
