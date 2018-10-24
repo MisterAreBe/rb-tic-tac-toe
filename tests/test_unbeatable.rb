@@ -97,20 +97,22 @@ class UnbeatableAi < Minitest::Test
     end
 
     def test_block_enemy
-        board = Game_board.new(3)
+        board = Game_board.new(4)
         temp = Unbeatable_ai.new('o', board)
         enemy = Base_ai.new('x', board)
         enemy.place_piece(0,0)
         enemy.place_piece(0,1)
+        enemy.place_piece(0,3)
         temp.smart_move()
-        assert_equal(['x','x','o'], board.grid[0])
+        assert_equal(['x','x','o','x'], board.grid[0])
         board.reset()
         temp = Unbeatable_ai.new('x', board)
         enemy = Base_ai.new('o', board)
         enemy.place_piece(2,2)
         enemy.place_piece(2,0)
+        enemy.place_piece(2,3)
         temp.smart_move()
-        assert_equal(['o','x','o'], board.grid[2])
+        assert_equal(['o','x','o','o'], board.grid[2])
     end
 
     def test_block_enemy_vertical
