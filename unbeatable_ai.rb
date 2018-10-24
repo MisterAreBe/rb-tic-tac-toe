@@ -173,7 +173,7 @@ class Unbeatable_ai < Base_ai
                     temp['blank'] << [i, ii]
                 end
             end
-            if temp['mine'].length == 1 && temp['blank'].length == 2
+            if temp['mine'].length == 1 && temp['blank'].length == (@board.size - 1)
                 temp['holdmine'] << temp['mine'][0]
                 temp['options'] << temp['blank'][0]; temp['options'] << temp['blank'][1]
                 if temp['holdmine'].length == 2
