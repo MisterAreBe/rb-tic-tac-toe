@@ -115,7 +115,7 @@ class Unbeatable_ai < Base_ai
                 end
                 counter += 1
             end
-            if temp['taken'].length == 2 && temp['block'].length == 1
+            if temp['taken'].length == (@board.size - 1) && temp['block'].length == 1
                 x = temp['block'][0][0]; y = temp['block'][0][1]
                 if @board.check_place(x, y)
                     return place_piece(x, y)
@@ -135,14 +135,14 @@ class Unbeatable_ai < Base_ai
             end
             row += 1; collum += 1; counter += 1
         end
-        if temp['taken'].length == 2 && temp['grab'].length == 1
+        if temp['taken'].length == (@board.size - 1) && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             if @board.check_place(x, y)
                 return place_piece(x, y)
             end
         end
         # diagonal block R-L
-        row = 0; collum = 2; counter = 0
+        row = 0; collum = (@board.size - 1); counter = 0
         temp = Hash.new
         temp['taken'] = []; temp['grab'] = []
         while counter < @board.size
