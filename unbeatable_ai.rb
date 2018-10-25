@@ -180,7 +180,7 @@ class Unbeatable_ai < Base_ai
                     x = temp['holdmine'][0][0]
                     y = temp['holdmine'][1][0]
                     if @board.check_place(x, y)
-                        #p "i try to fork u"
+                        p "i try to fork u"
                         return place_piece(x, y)
                     end
                 end
@@ -291,29 +291,34 @@ class Unbeatable_ai < Base_ai
     def empty_corner()
         if @board.check_place(0, 0)
             return place_piece(0, 0)
-        elsif @board.check_place(0, 2)
-            return place_piece(0, 2)
-        elsif @board.check_place(2, 0)
-            return place_piece(2, 0)
-        elsif @board.check_place(2, 2)
-            return place_piece(2, 2)
+        elsif @board.check_place(0, @end_point)
+            return place_piece(0, @end_point)
+        elsif @board.check_place(@end_point, 0)
+            return place_piece(@end_point, 0)
+        elsif @board.check_place(@end_point, @end_point)
+            return place_piece(@end_point, @end_point)
         else
             false
         end
     end
 
     def empty_side()
-        if @board.check_place(0, 1)
-            return place_piece(0, 1)
-        elsif @board.check_place(1, 0)
-            return place_piece(1, 0)
-        elsif @board.check_place(1, 2)
-            return place_piece(1, 2)
-        elsif @board.check_place(2, 1)
-            return place_piece(2, 1)
-        else
-            false
+        counter = 1
+        while counter < @end_point
+            p "this is my counter #{counter}"
+            if @board.check_place(0, counter)
+                return place_piece(0, counter)
+            elsif @board.check_place(counter, 0)
+                return place_piece(counter, 0)
+            elsif @board.check_place(counter, @end_point)
+                return place_piece(counter, @end_point)
+            elsif @board.check_place(@end_point, counter)
+                return place_piece(@end_point, counter)
+            else
+                counter += 1
+            end
         end
+        false
     end
 
     def smart_move()
