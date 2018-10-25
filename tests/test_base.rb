@@ -24,5 +24,11 @@ class BaseAi < Minitest::Test
         assert_equal('x',board.grid[0][2])
     end
 
+    def test_end_point
+        board = Game_board.new(51)
+        player = Base_ai.new('o', board)
+        assert_equal(50, player.end_point)
+    end
+
 
 end
