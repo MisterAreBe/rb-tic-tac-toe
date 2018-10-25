@@ -153,8 +153,7 @@ class GameBoard < Minitest::Test
 
     def test_finding_middle_on_big_board
         temp = Game_board.new(11)
-        assert_equal('', temp.find_mid())
-        assert_equal(5, temp.mid)
+        assert_equal(5, temp.find_mid())
     end
 
 end

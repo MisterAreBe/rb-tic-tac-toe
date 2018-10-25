@@ -99,11 +99,10 @@ class Game_board
     end
 
     def find_mid()
-        @mid = (@size/2)
-        return @grid[@mid][@mid]
+        mid = (@size/2)
+        return mid
     end
 
-    attr_reader :mid
     attr_reader :turn
     attr_reader :size
     attr_reader :grid
