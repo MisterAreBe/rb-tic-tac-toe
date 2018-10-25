@@ -70,6 +70,7 @@ class UnbeatableAi < Minitest::Test
         temp.place_piece(0,0)
         temp.place_piece(1,1)
         temp.place_piece(3,3)
+        temp.place_piece(4,4)
         temp.smart_move()
         assert_equal([['o','','','',''],['','o','','',''],['','','o','',''],['','','','o',''],['','','','','o']], board.grid)
         board.reset()
@@ -77,6 +78,7 @@ class UnbeatableAi < Minitest::Test
         temp.place_piece(2,2)
         temp.place_piece(0,0)
         temp.place_piece(1,1)
+        temp.place_piece(4,4)
         temp.smart_move()
         assert_equal([['x','','','',''],['','x','','',''],['','','x','',''],['','','','x',''],['','','','','x']], board.grid)
     end
