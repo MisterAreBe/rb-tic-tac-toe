@@ -180,7 +180,7 @@ class Unbeatable_ai < Base_ai
                     x = temp['holdmine'][0][0]
                     y = temp['holdmine'][1][0]
                     if @board.check_place(x, y)
-                        p "i try to fork u"
+                        #p "i try to fork u"
                         return place_piece(x, y)
                     end
                 end
@@ -305,7 +305,6 @@ class Unbeatable_ai < Base_ai
     def empty_side()
         counter = 1
         while counter < @end_point
-            p "this is my counter #{counter}"
             if @board.check_place(0, counter)
                 return place_piece(0, counter)
             elsif @board.check_place(counter, 0)
