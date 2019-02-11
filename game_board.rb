@@ -1,6 +1,6 @@
 class Game_board
 
-    def initialize(size)
+    def initialize(size=3)
         @size = size
         @grid = Array.new(@size) {Array.new(@size, '')}
         @turn = 0
@@ -9,9 +9,8 @@ class Game_board
     def check_place(x, y)
         if @grid[x][y] == ''
             return true
-        else
-            return false
         end
+        false
     end
 
     def place(piece, x, y)
