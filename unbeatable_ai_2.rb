@@ -293,7 +293,6 @@ class Unbeatable_ai_2 < Base_ai
     def center_move()
         center = @board.size/2
         if @board.check_place(center, center)
-            p "i shpulfmb print"
             return place_piece(center, center)
         end
         false
@@ -348,26 +347,96 @@ class Unbeatable_ai_2 < Base_ai
         false
     end
 
+    def find_enemy()
+        enemy = []
+        @board.grid.each_with_index do |row, i|
+            row.each_with_index do |v, ii|
+                if v != @piece && v != ''
+                    enemy << [i, ii]
+                end
+            end
+        end
+        return enemy
+    end
+
+    def find_empty_spot(enemy)
+        open_spot = {}
+        enemy.each_with_index do |v, i|
+            open_spot["enemy#{i}"] = []
+            x = (enemy[i][0] - 1); y = (enemy[i][1] - 1)
+            9.times do
+                if @board.check_place(x, y)
+                    open_spot["enemy#{i}"] << [x, y]
+                end
+                if y < (@board.size - 1) && y >= 0
+                    y += 1
+                elsif y == (2) && x < (@board.size - 1)
+                    y = 0
+                    x += 1
+                end
+            end
+        end
+        return open_spot
+    end
+
+    def surround_enemy(enemy, open_spot)
+        enemy.each_with_index do |v, i|
+            open_spot["enemy#{i}"].each do |v|
+                if @board.check_place(v[0], v[1])
+                    return place_piece(v[0], v[1])
+                end
+            end
+        end
+        false
+    end
+
+    def last_resort()
+        enemy = find_enemy()
+        open_spot = find_empty_spot(enemy)
+        surround_enemy(enemy, open_spot) != false ? surround_enemy(enemy, open_spot) : false
+    end
+
+    # def smart_move()
+    #     if @board.turn <= 1
+    #         return center_move()
+    #     end
+    #     method_array = [win_move(), block_move()]
+    #     method_array.each do |v|
+    #         if v != false
+    #             return v
+    #         end
+    #     end
+    #     method_array2 = [fork_move(), fork_blocking()]
+    #     method_array2.each do |v|
+    #         if v != false
+    #             return v
+    #         end
+    #     end
+    #     method_array3 = [opposite_corner(), place_empty_corner(), place_empty_side()]
+    #     method_array3.each do |v|
+    #         if v != false
+    #             return v
+    #         end
+    #     end
+    # end
+
     def smart_move()
-        # if @board.turn <= 1
-        #     return center_move()
-        # end
-        method_array = [win_move(), block_move()]
-        method_array.each do |v|
-            if v != false
-                return v
-            end
-        end
-        method_array2 = [fork_move(), fork_blocking()]
-        method_array2.each do |v|
-            if v != false
-                return v
-            end
-        end
-        method_array3 = [opposite_corner(), place_empty_corner(), place_empty_side()]
-        method_array3.each do |v|
-            if v != false
-                return v
+        unless win_move()
+            unless block_move()
+                unless fork_move()
+                    unless fork_blocking()
+                        unless center_move()
+                            unless opposite_corner()
+                                unless place_empty_corner()
+                                    unless place_empty_side()
+                                        unless last_resort()
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
             end
         end
     end
