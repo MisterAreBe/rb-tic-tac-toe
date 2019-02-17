@@ -1,52 +1,71 @@
 <title>Welcome</title>
-<meta name="google-signin-client_id" content="360720873685-2ucu0h81bev0h9a26hrmttsdctv5f1ua.apps.googleusercontent.com">
-<body>
+<body onload="showHideStuff()">
+	<div class="big_container">
     <div class="title">
         Welcome to RB's Tic-Tac-Toe!
     </div>
     <form method='post' action='/play'>
-		<div class='welcome'>
-			<div class="g-signin2" data-onsuccess="onSignIn" style='text-align: -webkit-center; margin: 10% 3% 5%;'>
-				<iframe sandbox='allow-popups-to-escape-sandbox'></iframe>
+		<div class="rules_modal" id="rules_modal">
+			<div class="modal_content">
+				<span class="close" onclick="closeModal()">&times;</span>
+				<div class="welcome_rules">
+					<div class='menu_rules'>
+						Vegeta (left guy) Always goes first, because he is faster.
+					</div>
+					<div class='menu_rules'>
+						Using the "home" button resets your game.
+					</div>
+					<div class='menu_rules'>
+						Using the "play again" butotn starts the game again with the same settings.
+					</div>
+				</div>
 			</div>
-			<button type='button' class='menu' onclick="signOut()"style='text-align: center; margin: 0% 3% 10%;'>Sign out</button>
-			<button class='menu'>Click Here to Play</button>
 		</div>
-		<input type='hidden' name='google_name' id='google_name' value=''>
+		<div class="container">
+			<div id='player1'>
+				<img src='images/vegeta.png'/>
+				<input type='radio' name='playerx' id='humanx' value='human' checked>
+				<label for='humanx' onclick='redMeUp()'>Human</label>
+				<input type='radio' name='playerx' id='easyx' value='easy'>
+				<label for='easyx' onclick='redMeUp()'>Random Ai</label>
+				<input type='radio' name='playerx' id='mediumx' value='medium'>
+				<label for='mediumx' onclick='redMeUp()'>Sequential Ai</label>
+				<input type='radio' name='playerx' id='hardx' value='hard'>
+				<label for='hardx' onclick='redMeUp()'>Unbeatable Ai</label>
+			</div>
+
+			<div class='welcome'>
+				<div class="num_container">
+					<div class="num">3</div>
+					<div class="num">5</div>
+					<div class="num">7</div>
+					<div class="num">9</div>
+					<div class="num">11</div>
+					<div class="num">13</div>
+					<div class="num">15</div>
+				</div>
+				<input type="range" class="slider" name="size" min="3" max="15" step="2">
+				<div class="button_wrapper">
+					<button class='menu'>Click Here to Play</button>
+					<div class="menu" onclick="gameRules()">
+						Game Info
+					</div>
+				</div>
+			</div>
+
+			<div id='player2'>
+				<img src='images/goku.png'/>
+				<input type='radio' name='playero' id='humano' value='human'>
+				<label for='humano' onclick='redMeUp()'>Human</label>
+				<input type='radio' name='playero' id='easyo' value='easy'>
+				<label for='easyo' onclick='redMeUp()'>Random Ai</label>
+				<input type='radio' name='playero' id='mediumo' value='medium'>
+				<label for='mediumo' onclick='redMeUp()'>Sequential Ai</label>
+				<input type='radio' name='playero' id='hardo' value='hard' checked>
+				<label for='hardo' onclick='redMeUp()'>Unbeatable Ai</label>
+			</div>
+		</div>
     </form>
+	</div>
 </body>
-<script src="https://apis.google.com/js/platform.js" async defer>
-function onSignIn(googleUser) {
-	var x = document.getElementById('google_name');
-	var profile = googleUser.getBasicProfile();
-	console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	console.log('Name: ' + profile.getName());
-	x.value = `${profile.getName()}`;
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-}
-function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-}
-// public void onClick(View v) {
-// 	switch (v.getId()) {
-//         // ...
-//         case R.id.button_sign_out:
-//             signOut();
-//             break;
-//         // ...
-//     }
-// }
-// private void signOut() {
-//     mGoogleSignInClient.signOut()
-//             .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-//                 @Override
-//                 public void onComplete(@NonNull Task<Void> task) {
-//                     // ...
-//         		}
-//     		});
-// }
-</script>
+<script src="js/board_script.js"></script>
