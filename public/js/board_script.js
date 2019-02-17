@@ -1,36 +1,5 @@
 function showHideStuff() {
-    var showBoard = document.getElementById('show_board');
-    var showSetUp = document.getElementById('show_set_up');
-    var showWinner = document.getElementById('show_winner');
-    var showReset = document.getElementById('show_reset');
-    var showOptions = document.getElementById('show_options');
-    var board = document.getElementById('board');
-    var setUp = document.getElementById('set_up');
-    var winner = document.getElementById('winner');
-    var reset = document.getElementById('reset');
-    var options = document.getElementById('options');
-    var showHide = [showBoard, showSetUp, showWinner, showReset, showOptions]
-    var changeView = [board, setUp, winner, reset, options]
-
-    for(var i = 0; i < showHide.length; i++) {
-        if(showHide[i].value == 'show') {
-            changeView[i].style.display = "block";
-        }else if(showHide[i].value == 'hide') {
-            changeView[i].style.display = "none";
-        }
-    }
-
-    var showPlayers = document.getElementById('show_players');
-    var player1 = document.getElementById('player1');
-    var player2 = document.getElementById('player2');
-    if(showPlayers.value == 'show') {
-        player1.style.display = "inline-block";
-        player2.style.display = "inline-block";
-    }else if(showPlayers.value == 'hide') {
-        player1.style.display = "none";
-        player2.style.display = "none";
-    }
-
+    
     var x = document.getElementsByTagName('input');
     for(var i = 0; i < x.length; i++){
         if(x[i].type == 'radio'){
@@ -41,25 +10,46 @@ function showHideStuff() {
             }
         }
     }
+    
+   var tile = document.getElementsByName("tile");
+   var size = document.getElementById("tile_size");
+   for (var i = 0; i < tile.length; i++) {
+        if(size.value == 3){
+            tile[i].style.height = "25%";
+            tile[i].style.width = "85%";
+        }else if(size.value == 5){
+            tile[i].style.height = "16%";
+            tile[i].style.width = "68%";
+            tile[i].style.margin = "10px";
+        }else if(size.value == 7){
+            tile[i].style.height = "11%";
+            tile[i].style.width = "68%";
+            tile[i].style.margin = "10px";
+        }else if(size.value == 9){
+            tile[i].style.height = "8%";
+            tile[i].style.width = "68%";
+            tile[i].style.margin = "10px";
+        }else if(size.value == 11){
+            tile[i].style.height = "6%";
+            tile[i].style.width = "68%";
+            tile[i].style.margin = "10px";
+        }else if(size.value == 13){
+            tile[i].style.height = "6%";
+            tile[i].style.width = "68%";
+            tile[i].style.margin = "10px";
+        }else if(size.value == 15){
+            tile[i].style.height = "5%";
+            tile[i].style.width = "60%";
+            tile[i].style.margin = "10px";
+        }
+   }
 
-    var tileSize = document.getElementById('tile_size');
-    var grid = document.getElementsByTagName('td');
-    tileSize = 100/tileSize.value;
-    for(var i = 0; i < grid.length; i++) {
-        grid[i].style.height = `${tileSize}%`;
-        grid[i].style.width = `${tileSize}%`;
-    }
 
     var autoMove = document.getElementById('bot_battle');
     var form = document.getElementById('main_form');
     if(autoMove.value == "bot battle"){
         form.submit();
     }
-}
-function setUp() {
-    var form = document.getElementById('main_form');
-    form.action = '/set_up';
-    form.submit();
 }
 function startOver() {
     var form = document.getElementById('main_form');
@@ -82,5 +72,18 @@ function redMeUp() {
                 x[i].labels[0].style.color = 'goldenrod';
             }
         }
+    }
+}
+function gameRules() {
+    document.getElementById("rules_modal").style.display = "block";
+}
+function closeModal() {
+    document.getElementById("rules_modal").style.display = "none";
+}
+
+window.onclick = function(event) {
+    var modal = document.getElementById("rules_modal");
+    if (event.target == modal) {
+        document.getElementById("rules_modal").style.display = "none";
     }
 }

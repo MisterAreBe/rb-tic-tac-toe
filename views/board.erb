@@ -1,81 +1,46 @@
 <title>Rb's Tic-Tac-Toe!</title>
 <body onload="showHideStuff()">
-    <div class='title'>
-        Tic-Tac-Toe by MisterArebe
-        <a href='/' class='home_link'>(Home)</a>
-        <%=google_name%>
+    <div class="board_page_container">
+        <div class='title'>
+            <div class='title_inards' onclick='startOver()'>Tic-Tac-Toe by MisterArebe</div>
+        </div>
+        <form method='post' action='/move' id='main_form'>
+            <div class='board' id='board'>
+                <div class='table'>
+                    <%board.grid.each_with_index do |row, i|%>
+                        <div class='tr'>
+                            <%row.each_with_index do |v, ii|%>
+                            <%if v == 'x'%>
+                                <%v = "<img src='images/vegeta.png'/>"%>
+                            <%elsif v == 'o'%>
+                                <%v = "<img src='images/goku.png'/>"%>
+                            <%else%>
+                                <%v == ''%>
+                            <%end%>
+                                <div class='td'>
+                                    <button name="tile" value='<%=i%>,<%=ii%>'><%=v%></button>
+                                </div>
+                            <%end%>
+                        </div>
+                    <%end%>
+                </div>
+            </div>
+            <input type='hidden' id='bot_battle' value="<%=bot_bot%>">
+            <input type="hidden" id='tile_size' value="<%=board.grid.size%>">
+        </form>
     </div>
-    <form method='post' action='/move' id='main_form'>
-        <div id='player1'>
-            <img src='images/vegeta.png'/>
-            <input type='radio' name='playerx' id='humanx' value='human' checked>
-            <label for='humanx' onclick='redMeUp()'>Human</label>
-            <input type='radio' name='playerx' id='easyx' value='easy'>
-            <label for='easyx' onclick='redMeUp()'>Random Ai</label>
-            <input type='radio' name='playerx' id='mediumx' value='medium'>
-            <label for='mediumx' onclick='redMeUp()'>Sequential Ai</label>
-            <input type='radio' name='playerx' id='hardx' value='hard'>
-            <label for='hardx' onclick='redMeUp()'>Unbeatable Ai</label>
-
-        </div>
-        <div class='board' id='board'>
-            <table>
-                <%board.grid.each_with_index do |row, i|%>
-                    <tr>
-                        <%row.each_with_index do |v, ii|%>
-                        <%if v == 'x'%>
-                            <%v = "<img src='images/vegeta.png'/>"%>
-                        <%elsif v == 'o'%>
-                            <%v = "<img src='images/goku.png'/>"%>
-                        <%else%>
-                            <%v == ''%>
-                        <%end%>
-                            <td>
-                                <button name='tile' value='<%=i%>,<%=ii%>'><%=v%></button>
-                            </td>
-                        <%end%>
-                    </tr>
-                <%end%>
-            </table>
-        </div>
-        <div id='player2'>
-            <img src='images/goku.png'/>
-            <input type='radio' name='playero' id='humano' value='human'>
-            <label for='humano' onclick='redMeUp()'>Human</label>
-            <input type='radio' name='playero' id='easyo' value='easy'>
-            <label for='easyo' onclick='redMeUp()'>Random Ai</label>
-            <input type='radio' name='playero' id='mediumo' value='medium'>
-            <label for='mediumo' onclick='redMeUp()'>Sequential Ai</label>
-            <input type='radio' name='playero' id='hardo' value='hard' checked>
-            <label for='hardo' onclick='redMeUp()'>Unbeatable Ai</label>
-
-        </div>
-        <div class='options' id='options'>
-            <div class='set_up' id='set_up'>
-                <button class='menu' type='button' onclick='setUp()'>
-                    Ready?
-                </button>
-            </div>
-            <div class='winner' id='winner'>
-                <%=winner%>
-            </div>
-            <div class='reset' id='reset'>
-                <button class='menu' type='button' onclick='startOver()'>
-                    Start over?
-                </button>
-                <button class='menu' type='button' onclick='resetBoard()'>
-                    Play again?
-                </button>
+    <%if winner == ''%>
+        <div class='modal_container' style="display:none";>
+    <%else%>
+        <div class='modal_container' style="display:block";>
+            <div class='modal'>
+                <div class='reset' id='reset'>
+                    <div class='menu' onclick='startOver()'>Menu</div>
+                    <div class="winner"><%=winner%></div>
+                    <div class='menu' onclick='resetBoard()'>Play again?</div>
+                </div>
             </div>
         </div>
-        <input type='hidden' id='bot_battle' value="<%=bot_bot%>">
-        <input type='hidden' id='show_options' value='<%=show_options%>'>
-        <input type='hidden' name='show_board' id='show_board' value='<%=show_board%>'>
-        <input type='hidden' name='show_players' id='show_players' value="<%=show_players%>">
-        <input type='hidden' name='show_set_up' id='show_set_up' value='<%=show_set_up%>'>
-        <input type='hidden' name='show_winner' id='show_winner' value='<%=show_winner%>'>
-        <input type='hidden' name='show_reset' id='show_reset' value='<%=show_reset%>'>
-        <input type="hidden" id='tile_size' value='<%=board.grid.size%>'>
-    </form>
+    <%end%>
 </body>
 <script src="js/board_script.js"></script>

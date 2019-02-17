@@ -13,7 +13,7 @@ class Unbeatable_ai < Base_ai
                 else
                     temp['grab'] << [i, ii]
                 end
-                if temp['taken'].length == 2 && temp['grab'].length == 1
+                if temp['taken'].length == @end_point && temp['grab'].length == 1
                     x = temp['grab'][0][0]; y = temp['grab'][0][1]
                     if @board.check_place(x, y)
                         return place_piece(x, y)
@@ -35,7 +35,7 @@ class Unbeatable_ai < Base_ai
                 end
                 counter += 1
             end
-            if temp['taken'].length == 2 && temp['grab'].length == 1
+            if temp['taken'].length == @end_point && temp['grab'].length == 1
                 x = temp['grab'][0][0]; y = temp['grab'][0][1]
                 if @board.check_place(x, y)
                     return place_piece(x, y)
@@ -55,7 +55,7 @@ class Unbeatable_ai < Base_ai
             end
             row += 1; collum += 1; counter += 1
         end
-        if temp['taken'].length == 2 && temp['grab'].length == 1
+        if temp['taken'].length == @end_point && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             if @board.check_place(x, y)
                 return place_piece(x, y)
@@ -73,7 +73,7 @@ class Unbeatable_ai < Base_ai
             end
             row += 1; collum -= 1; counter += 1
         end
-        if temp['taken'].length == 2 && temp['grab'].length == 1
+        if temp['taken'].length == @end_point && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             if @board.check_place(x, y)
                 return place_piece(x, y)
@@ -93,7 +93,7 @@ class Unbeatable_ai < Base_ai
                 else
                     temp['block'] << [i, ii]
                 end
-                if temp['taken'].length == 2 && temp['block'].length == 1
+                if temp['taken'].length == @end_point && temp['block'].length == 1
                     x = temp['block'][0][0]; y = temp['block'][0][1]
                     if @board.check_place(x, y)
                         return place_piece(x, y)
@@ -115,7 +115,7 @@ class Unbeatable_ai < Base_ai
                 end
                 counter += 1
             end
-            if temp['taken'].length == 2 && temp['block'].length == 1
+            if temp['taken'].length == @end_point && temp['block'].length == 1
                 x = temp['block'][0][0]; y = temp['block'][0][1]
                 if @board.check_place(x, y)
                     return place_piece(x, y)
@@ -135,14 +135,14 @@ class Unbeatable_ai < Base_ai
             end
             row += 1; collum += 1; counter += 1
         end
-        if temp['taken'].length == 2 && temp['grab'].length == 1
+        if temp['taken'].length == @end_point && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             if @board.check_place(x, y)
                 return place_piece(x, y)
             end
         end
         # diagonal block R-L
-        row = 0; collum = 2; counter = 0
+        row = 0; collum = @end_point; counter = 0
         temp = Hash.new
         temp['taken'] = []; temp['grab'] = []
         while counter < @board.size
@@ -153,7 +153,7 @@ class Unbeatable_ai < Base_ai
             end
             row += 1; collum -= 1; counter += 1
         end
-        if temp['taken'].length == 2 && temp['grab'].length == 1
+        if temp['taken'].length == @end_point && temp['grab'].length == 1
             x = temp['grab'][0][0]; y = temp['grab'][0][1]
             if @board.check_place(x, y)
                 return place_piece(x, y)
@@ -173,7 +173,7 @@ class Unbeatable_ai < Base_ai
                     temp['blank'] << [i, ii]
                 end
             end
-            if temp['mine'].length == 1 && temp['blank'].length == 2
+            if temp['mine'].length == 1 && temp['blank'].length == @end_point
                 temp['holdmine'] << temp['mine'][0]
                 temp['options'] << temp['blank'][0]; temp['options'] << temp['blank'][1]
                 if temp['holdmine'].length == 2
@@ -258,7 +258,7 @@ class Unbeatable_ai < Base_ai
         @board.grid.each_with_index do |row, i|
             row.each_with_index do |v, ii|
                 if v != @piece && v != ''
-                    if i == 0 || i == 2 && ii == 0 || ii == 2
+                    if i == 0 || i == @end_point && ii == 0 || ii == @end_point
                         temp['enemy'] << [i, ii]
                     end
                 end
@@ -267,18 +267,18 @@ class Unbeatable_ai < Base_ai
         if temp['enemy'].length > 0
             temp['enemy'].each do |v|
                 if v[0] == 0 && v[1] == 0
-                    if @board.check_place(2, 2)
-                        return place_piece(2, 2)
+                    if @board.check_place(@end_point, @end_point)
+                        return place_piece(@end_point, @end_point)
                     end
-                elsif v[0] == 0 && v[1] == 2
-                    if @board.check_place(2, 0)
-                        return place_piece(2, 0)
+                elsif v[0] == 0 && v[1] == @end_point
+                    if @board.check_place(@end_point, 0)
+                        return place_piece(@end_point, 0)
                     end
-                elsif v[0] == 2 && v[1] == 0
-                    if @board.check_place(0, 2)
-                        return place_piece(0, 2)
+                elsif v[0] == @end_point && v[1] == 0
+                    if @board.check_place(0, @end_point)
+                        return place_piece(0, @end_point)
                     end
-                elsif v[0] == 2 && v[1] == 2
+                elsif v[0] == @end_point && v[1] == @end_point
                     if @board.check_place(0, 0)
                         return place_piece(0, 0)
                     end
@@ -291,29 +291,33 @@ class Unbeatable_ai < Base_ai
     def empty_corner()
         if @board.check_place(0, 0)
             return place_piece(0, 0)
-        elsif @board.check_place(0, 2)
-            return place_piece(0, 2)
-        elsif @board.check_place(2, 0)
-            return place_piece(2, 0)
-        elsif @board.check_place(2, 2)
-            return place_piece(2, 2)
+        elsif @board.check_place(0, @end_point)
+            return place_piece(0, @end_point)
+        elsif @board.check_place(@end_point, 0)
+            return place_piece(@end_point, 0)
+        elsif @board.check_place(@end_point, @end_point)
+            return place_piece(@end_point, @end_point)
         else
             false
         end
     end
 
     def empty_side()
-        if @board.check_place(0, 1)
-            return place_piece(0, 1)
-        elsif @board.check_place(1, 0)
-            return place_piece(1, 0)
-        elsif @board.check_place(1, 2)
-            return place_piece(1, 2)
-        elsif @board.check_place(2, 1)
-            return place_piece(2, 1)
-        else
-            false
+        counter = 1
+        while counter < @end_point
+            if @board.check_place(0, counter)
+                return place_piece(0, counter)
+            elsif @board.check_place(counter, 0)
+                return place_piece(counter, 0)
+            elsif @board.check_place(counter, @end_point)
+                return place_piece(counter, @end_point)
+            elsif @board.check_place(@end_point, counter)
+                return place_piece(@end_point, counter)
+            else
+                counter += 1
+            end
         end
+        false
     end
 
     def smart_move()

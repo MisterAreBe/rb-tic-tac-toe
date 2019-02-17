@@ -151,4 +151,9 @@ class GameBoard < Minitest::Test
         assert_equal(false, temp.check_place(0, 2))
     end
 
+    def test_finding_middle_on_big_board
+        temp = Game_board.new(11)
+        assert_equal(5, temp.find_mid())
+    end
+
 end
